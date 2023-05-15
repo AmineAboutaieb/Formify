@@ -1,0 +1,12 @@
+.globalContainer{
+    display:flex;
+    justify-content:flex-start;
+    height:100%;
+}
+
+.mainContainer{
+    width:100%;
+    background-color:var(--body_primary_background);
+    overflow-y:scroll;
+    height:100vh;
+}

@@ -1,0 +1,23 @@
+.themeIconContainer{
+    background-color:transparent;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.sunIcon, .moonIcon{
+    cursor:pointer;
+}
+
+.sunIcon{
+ color:orange;
+}
+.sunIcon:hover{
+    color:rgb(252, 178, 41);
+   }
+.moonIcon{
+    color:black;
+}
+.moonIcon:hover{
+    color:rgb(61, 61, 61);
+   }
