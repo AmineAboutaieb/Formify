@@ -1,0 +1,38 @@
+.modalContainer {
+    background-color:var(--body_fourth_background);
+    /* border:1px solid var(--input_border_color); */
+    border-radius:4px;    
+    width: 60%;
+    min-height:70%;
+    cursor:default;
+  }
+  .modalheader{
+    display:flex;
+    justify-content:space-between;
+    padding:16px;
+    border-bottom:1px solid var(--input_border_color);
+  }
+  .modalContent{
+    padding:16px;
+  }
+  .close {
+    color:var(--text_primary_color);
+    cursor:pointer;
+  }
+
+  .modalTitle{
+    font-size:17px;
+    color:var(--text_primary_color);
+  }
+
+@media only screen and (max-width: 768px) {
+    .modalContainer {
+        width:80%;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .modalContainer {
+        width:98%;
+    }
+}

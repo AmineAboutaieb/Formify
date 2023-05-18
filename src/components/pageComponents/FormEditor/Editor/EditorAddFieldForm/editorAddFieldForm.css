@@ -1,0 +1,11 @@
+.addContainer{
+    /* border:1px solid red; */
+    margin-bottom:10px;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.addButton{
+    background-color:var(--app_accent_color)!important;
+    color:var(--app_accent_text_color)!important;
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../../../styles/sharedPageStyles.css";
 import "./newFormEditor.css";
 import EditorViewer from "../Editor/EditorViewer/EditorViewer";
+import EditorAddFieldForm from "../Editor/EditorAddFieldForm/EditorAddFieldForm";
 
 function FormEditor() {
   const [dataFields, setDataFields] = useState([
@@ -43,6 +44,7 @@ function FormEditor() {
     <div className="PageContainer">
       <h4 className="pageTitle">Create a new form</h4>
       <div className="pageContent">
+        <EditorAddFieldForm />
         <EditorViewer dataFields={dataFields} />
       </div>
     </div>

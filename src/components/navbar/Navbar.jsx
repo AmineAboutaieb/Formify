@@ -1,6 +1,7 @@
 import React from "react";
 import "./navbar.css";
-import MenuIcon from "@material-ui/icons/Menu";
+// import MenuIcon from "@material-ui/icons/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 import Darkmode from "../darkmode/Darkmode";
 
 function Navbar({ showSideBar, setShowSideBar }) {

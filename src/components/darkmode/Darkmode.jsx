@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DarkModeIcon from "@material-ui/icons/WbSunnyTwoTone";
-import LightModeIcon from "@material-ui/icons/WbSunny";
+// import DarkModeIcon from "@material-ui/icons/WbSunnyTwoTone";
+// import LightModeIcon from "@material-ui/icons/WbSunny";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 import "./darkmode.css";
 

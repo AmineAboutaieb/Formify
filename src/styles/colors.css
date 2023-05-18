@@ -8,6 +8,8 @@
     --text_primary_muted_hovered_color : rgb(188, 206, 228);
     --screen_overlay_color :rgb(127, 127, 127, 0.5);
     --input_border_color :rgb(222, 226, 230);
+    --app_accent_color :rgb(255, 96, 96);
+    --app_accent_text_color :rgb(255, 255, 255);
 }
 [data-theme="dark"] {
     --body_primary_background : rgb(45, 51, 60);
@@ -19,4 +21,6 @@
     --text_primary_muted_hovered_color : rgb(188, 206, 228);
     --screen_overlay_color :rgb(146, 150, 155, 0.5);
     --input_border_color :rgb(70, 79, 91);
+    --app_accent_color :rgb(255, 96, 96);
+    --app_accent_text_color :rgb(255, 255, 255);
 }

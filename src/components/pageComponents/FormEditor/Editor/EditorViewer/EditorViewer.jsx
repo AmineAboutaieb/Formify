@@ -1,7 +1,7 @@
 import React from "react";
 import "./editorViewer.css";
-import EditorTextField from "../Fields/EditorTextField/EditorTextField";
-import EditorDropdownField from "../Fields/EditorDropdownField/EditorDropdownField";
+import EditorTextField from "../EditorFields/EditorTextField/EditorTextField";
+import EditorDropdownField from "../EditorFields/EditorDropdownField/EditorDropdownField";
 
 function EditorViewer({ dataFields }) {
   return (
