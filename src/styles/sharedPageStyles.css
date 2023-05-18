@@ -1,0 +1,19 @@
+.pageTitle{
+    font-size:18px;
+    font-weight:600;
+    color:var(--text_primary_color);
+}
+
+.PageContainer{
+    /* border:1px solid white; */
+    margin:10px 0 0 0;
+}
+
+.pageContent{
+    background-color:var(--body_fourth_background);
+    margin:20px 0 0 0;
+    min-height:50vh; /*TO REMOVE DEV ONLY*/
+    border-radius:0.250rem;
+    box-shadow: 0 1px 3px rgba(27, 23, 30, 0.1);
+    padding:24px;
+}
