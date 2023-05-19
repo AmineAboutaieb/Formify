@@ -8,12 +8,16 @@ import "../../../../../styles/sharedEditorFieldStyles.css";
 import EditorAddTextFieldForm from "./EditorAddFieldForms/EditorAddTextFieldForm/EditorAddTextFieldForm";
 import EditorAddDropdownFieldForm from "./EditorAddFieldForms/EditorAddDropdownFieldForm/EditorAddDropdownFieldForm";
 
-function EditorAddFieldForm() {
+function EditorAddFieldForm({ addNewDataFieldHandler }) {
   const [show, setShow] = useState(false);
   const [newFieldTypeDropdownValue, setNewFieldTypeDropdownValue] =
     useState("text");
   const onNewFieldTypeDropdownChange = (e) => {
     setNewFieldTypeDropdownValue(e.target.value);
+  };
+
+  const toggleFormHandler = () => {
+    setShow(false);
   };
 
   return (
@@ -49,7 +53,10 @@ function EditorAddFieldForm() {
             </div>
             <div className="newFieldFormContainer">
               {newFieldTypeDropdownValue === "text" && (
-                <EditorAddTextFieldForm />
+                <EditorAddTextFieldForm
+                  addNewDataFieldHandler={addNewDataFieldHandler}
+                  toggleFormHandler={toggleFormHandler}
+                />
               )}
               {newFieldTypeDropdownValue === "dropdown" && (
                 <EditorAddDropdownFieldForm />

@@ -40,11 +40,14 @@ function FormEditor() {
       },
     },
   ]);
+  const addNewDataFieldHandler = (fieldObject) => {
+    setDataFields([...dataFields, fieldObject]);
+  };
   return (
     <div className="PageContainer">
       <h4 className="pageTitle">Create a new form</h4>
       <div className="pageContent">
-        <EditorAddFieldForm />
+        <EditorAddFieldForm addNewDataFieldHandler={addNewDataFieldHandler} />
         <EditorViewer dataFields={dataFields} />
       </div>
     </div>

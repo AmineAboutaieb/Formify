@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../../../../../../../styles/sharedEditorFieldStyles.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
+import { v4 as uuidv4, v4 } from "uuid";
 
-function EditorAddTextFieldForm() {
+function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
   const [textFieldFormData, setTextFieldFormData] = useState({
     label: "",
-    type: "",
+    type: "text",
     placeholder: "",
     defaultValue: "",
   });
@@ -32,6 +33,27 @@ function EditorAddTextFieldForm() {
       ...newObj,
     });
     validationVerifier(e, param);
+  };
+
+  const createNewFieldObject = () => {
+    let newFieldObject = {
+      key: v4(),
+      type: "text",
+      specs: {
+        label: textFieldFormData.label,
+        inputType: textFieldFormData.type,
+        placeholder: textFieldFormData.placeholder,
+        defaultValue: textFieldFormData.defaultValue,
+      },
+    };
+    addNewDataFieldHandler(newFieldObject);
+    setTextFieldFormData({
+      label: "",
+      type: "",
+      placeholder: "",
+      defaultValue: "",
+    });
+    toggleFormHandler();
   };
 
   return (
@@ -97,7 +119,7 @@ function EditorAddTextFieldForm() {
           disabled={
             formDataValidation.label || formDataValidation.type ? true : false
           }
-          clickHandler={() => alert("Submitted")}
+          clickHandler={createNewFieldObject}
         />
       </div>
     </>
