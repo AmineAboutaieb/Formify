@@ -10,6 +10,7 @@
     --input_border_color :rgb(222, 226, 230);
     --app_accent_color :rgb(255, 96, 96);
     --app_accent_text_color :rgb(255, 255, 255);
+    --app_not_valid_red_color :rgb(241, 87, 118);
 }
 [data-theme="dark"] {
     --body_primary_background : rgb(45, 51, 60);
@@ -23,4 +24,5 @@
     --input_border_color :rgb(70, 79, 91);
     --app_accent_color :rgb(255, 96, 96);
     --app_accent_text_color :rgb(255, 255, 255);
+    --app_not_valid_red_color :rgb(247, 154, 173);
 }

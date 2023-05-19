@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./editorAddFieldForm.css";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Overlay from "../../../../Modal/Overlay/Overlay";
 import CustomModal from "../../../../Modal/Modal";
+import "../../../../../styles/sharedEditorFieldStyles.css";
+import EditorAddTextFieldForm from "./EditorAddFieldForms/EditorAddTextFieldForm/EditorAddTextFieldForm";
+import EditorAddDropdownFieldForm from "./EditorAddFieldForms/EditorAddDropdownFieldForm/EditorAddDropdownFieldForm";
 
 function EditorAddFieldForm() {
   const [show, setShow] = useState(false);
+  const [newFieldTypeDropdownValue, setNewFieldTypeDropdownValue] =
+    useState("text");
+  const onNewFieldTypeDropdownChange = (e) => {
+    setNewFieldTypeDropdownValue(e.target.value);
+  };
+
   return (
     <>
       <div className="addContainer">
@@ -23,9 +32,30 @@ function EditorAddFieldForm() {
           closeOverlay={(e) => e.currentTarget == e.target && setShow(false)}
         >
           <CustomModal
-            modalTitle="Ajouter un champ"
+            modalTitle="Add a field"
             closeOverlay={(e) => e.currentTarget == e.target && setShow(false)}
-          ></CustomModal>
+          >
+            <div className="editorFieldContainer">
+              <label className="editorFieldLabel">Field Type</label>
+              <select
+                className="editorField"
+                placeholder="Choose a field type"
+                onChange={onNewFieldTypeDropdownChange}
+                defaultValue={newFieldTypeDropdownValue}
+              >
+                <option value="text">Text</option>
+                <option value="dropdown">Dropdown</option>
+              </select>
+            </div>
+            <div className="newFieldFormContainer">
+              {newFieldTypeDropdownValue === "text" && (
+                <EditorAddTextFieldForm />
+              )}
+              {newFieldTypeDropdownValue === "dropdown" && (
+                <EditorAddDropdownFieldForm />
+              )}
+            </div>
+          </CustomModal>
         </Overlay>
       )}
     </>

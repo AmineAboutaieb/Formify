@@ -9,3 +9,8 @@
     background-color:var(--app_accent_color)!important;
     color:var(--app_accent_text_color)!important;
 }
+
+.newFieldFormContainer{
+    margin-top:20px;
+    /* border:1px solid white; */
+}

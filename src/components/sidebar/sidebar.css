@@ -1,6 +1,5 @@
 .sidebar, .sidebar-hidden{
     background-color:var(--body_secondary_background);
-    transition: all 0.1s;
     padding:10px 0;
 }
 
@@ -44,6 +43,10 @@
     font-size:19px!important;
 }
 
+.fixIconMarginTop{
+    margin-top:2px;
+}
+
 .linkElementContainer:hover .linkElement{
     color:var(--text_primary_muted_hovered_color);   
 }
@@ -52,7 +55,7 @@
 }
 
 .active svg, .active{
-    color:#fff!important;
+    color:var(--app_accent_color)!important;
 }
 
 .closeButtonContainer{

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 // import SettingsEthernetOutlinedIcon from "@material-ui/icons/CodeOutlined";
 import SettingsEthernetOutlinedIcon from "@mui/icons-material/Code";
+import DataObjectOutlinedIcon from "@mui/icons-material/DataObjectOutlined";
 
 function Sidebar({ showSideBar, setShowSideBar }) {
   return (
@@ -26,13 +27,13 @@ function Sidebar({ showSideBar, setShowSideBar }) {
           <div className="linkElementContainer">
             <NavLink className="linkElement" to={"/"}>
               <HomeOutlinedIcon className="linkElementIcon" />
-              Home
+              <span>Home</span>
             </NavLink>
           </div>
           <div className="linkElementContainer">
             <NavLink className="linkElement" to={"/new-form-editor"}>
-              <SettingsEthernetOutlinedIcon className="linkElementIcon" />
-              New form
+              <DataObjectOutlinedIcon className="linkElementIcon fixIconMarginTop" />
+              <span>New form</span>
             </NavLink>
           </div>
         </ul>

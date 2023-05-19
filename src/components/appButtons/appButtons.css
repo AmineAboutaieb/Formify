@@ -1,0 +1,9 @@
+.appButton:disabled{
+    color:var(--text_primary_muted_color)!important;
+}
+.appButton:hover{
+    background-color:var(--app_accent_color)!important;
+}
+.appButton:active{
+    background-color:var(--app_accent_color)!important;
+}

@@ -1,13 +1,15 @@
 .editorFieldContainer{
     display:flex;
     flex-direction:column;
-    margin-bottom:10px;
+    width:96%;
+    margin:0 auto 10px auto;
 }
 
 .editorFieldLabel{
-    font-size:14px;
+    font-size:12px;
     margin-bottom:8px;
     color:var(--text_primary_color);
+    font-weight:bolder;
 }
 
 .editorField{
@@ -19,11 +21,32 @@
     font-size:14px;
 }
 
+.notValidFormElement{
+    border:1px solid var(--app_not_valid_red_color);
+}
+
+.notValidText{
+    color:var(--app_not_valid_red_color);
+    font-size:.70rem;
+    margin-top:4px;
+    margin-left:3px;
+}
+
 .editorField:focus{
     outline:none;
+}
+
+.editorFieldArea{
+    resize:none;
 }
 
 .editorField::placeholder{
     color:var(--text_primary_color);
     font-size:12px;
+}
+
+.editorButtonContainer{
+    display:flex;
+    justify-content:center;
+    margin-top:1.4rem;
 }
