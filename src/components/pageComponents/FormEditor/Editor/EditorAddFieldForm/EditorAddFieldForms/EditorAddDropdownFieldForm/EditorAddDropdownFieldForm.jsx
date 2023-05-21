@@ -1,17 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../../../../../styles/sharedEditorFieldStyles.css";
+import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
+import { v4 as uuidv4, v4 } from "uuid";
+import DropdownOptionsSelector from "./DropdownOptionsSelector/DropdownOptionsSelector";
 
-function EditorAddDropdownFieldForm() {
+function EditorAddDropdownFieldForm({
+  addNewDataFieldHandler,
+  toggleFormHandler,
+}) {
+  const [dropdownFieldFormData, setDropdownFieldFormData] = useState({
+    label: "",
+    options: [],
+    placeholder: "",
+    defaultValue: "",
+  });
+  const [formDataValidation, setFormDataValidation] = useState({
+    label: true,
+  });
+
+  const validationVerifier = (e, param) => {
+    let key = param;
+    let newObj = formDataValidation;
+    if (e.target.value === "" || e.target.value.trim() === "") {
+      newObj[key] = true;
+    } else {
+      newObj[key] = false;
+    }
+    setFormDataValidation({ ...newObj });
+  };
+
+  const onChangeMethod = (e, param) => {
+    let newObj = dropdownFieldFormData;
+    newObj[param] = e.target.value;
+    setDropdownFieldFormData({
+      ...newObj,
+    });
+    validationVerifier(e, param);
+  };
+
+  const createNewFieldObject = () => {
+    let newFieldObject = {
+      key: v4(),
+      type: "dropdown",
+      specs: {
+        label: dropdownFieldFormData.label,
+        options: dropdownFieldFormData.options,
+        placeholder: dropdownFieldFormData.placeholder,
+        defaultValue: dropdownFieldFormData.defaultValue,
+      },
+    };
+    addNewDataFieldHandler(newFieldObject);
+    setDropdownFieldFormData({
+      label: "",
+      options: "",
+      placeholder: "",
+      defaultValue: "",
+    });
+    toggleFormHandler();
+  };
+
+  const addNewOptionHandler = (option) => {
+    setDropdownFieldFormData((prevState) => ({
+      ...prevState,
+      options: [...prevState.options, option],
+    }));
+  };
+
+  const removeOptionHandler = (key) => {
+    setDropdownFieldFormData((prevState) => ({
+      ...prevState,
+      options: prevState.options.filter((opt) => opt.key != key),
+    }));
+  };
+
   return (
     <>
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Dropdown field label</label>
         <input
-          className="editorField"
+          className={`editorField ${
+            formDataValidation.label ? "notValidFormElement" : ""
+          }`}
           type="text"
           placeholder="Choose a dropdown field label"
-          // defaultValue={specs.defaultValue}
+          value={dropdownFieldFormData.label}
+          onChange={(e) => onChangeMethod(e, "label")}
         />
+        {formDataValidation.label && (
+          <span className="notValidText">Champ obligatoire *</span>
+        )}
       </div>
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Dropdown field placeholder</label>
@@ -19,7 +96,8 @@ function EditorAddDropdownFieldForm() {
           className="editorField"
           type="text"
           placeholder="Choose a dropdown field placeholder"
-          // defaultValue={specs.defaultValue}
+          value={dropdownFieldFormData.placeholder}
+          onChange={(e) => onChangeMethod(e, "placeholder")}
         />
       </div>
       <div className="editorFieldContainer">
@@ -28,17 +106,27 @@ function EditorAddDropdownFieldForm() {
           className="editorField"
           type="text"
           placeholder="Choose a dropdown field default value"
-          // defaultValue={specs.defaultValue}
+          value={dropdownFieldFormData.defaultValue}
+          onChange={(e) => onChangeMethod(e, "defaultValue")}
         />
       </div>
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Dropdown field options</label>
-        <textarea
-          rows={15}
-          className="editorField editorFieldArea"
-          type="text"
-          placeholder="Add dropdown field options (,) comma separated. Example : option 1, option 2, option 3 etc ..."
-          // defaultValue={specs.defaultValue}
+        <DropdownOptionsSelector
+          addNewOptionHandler={addNewOptionHandler}
+          removeOptionHandler={removeOptionHandler}
+        />
+      </div>
+      <div className="editorButtonContainer">
+        <AppButtonPrimary
+          text={"Create"}
+          disabled={
+            formDataValidation.label ||
+            dropdownFieldFormData.options.length <= 0
+              ? true
+              : false
+          }
+          clickHandler={createNewFieldObject}
         />
       </div>
     </>

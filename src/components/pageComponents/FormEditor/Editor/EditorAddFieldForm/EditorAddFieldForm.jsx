@@ -59,7 +59,10 @@ function EditorAddFieldForm({ addNewDataFieldHandler }) {
                 />
               )}
               {newFieldTypeDropdownValue === "dropdown" && (
-                <EditorAddDropdownFieldForm />
+                <EditorAddDropdownFieldForm
+                  addNewDataFieldHandler={addNewDataFieldHandler}
+                  toggleFormHandler={toggleFormHandler}
+                />
               )}
             </div>
           </CustomModal>

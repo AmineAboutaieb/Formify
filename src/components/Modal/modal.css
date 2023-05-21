@@ -3,7 +3,7 @@
     /* border:1px solid var(--input_border_color); */
     border-radius:4px;    
     width: 60%;
-    max-height:90%;
+    max-height:97%;
     overflow-y:auto;
     cursor:default;
   }

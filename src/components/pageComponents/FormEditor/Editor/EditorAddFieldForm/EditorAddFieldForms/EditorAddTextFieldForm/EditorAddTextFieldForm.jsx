@@ -66,7 +66,7 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
           }`}
           type="text"
           placeholder="Choose a text field label"
-          defaultValue={textFieldFormData.label}
+          value={textFieldFormData.label}
           onChange={(e) => onChangeMethod(e, "label")}
         />
         {formDataValidation.label && (
@@ -80,7 +80,7 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
             formDataValidation.type ? "notValidFormElement" : ""
           }`}
           placeholder="Choose a text field type"
-          defaultValue={textFieldFormData.type}
+          value={textFieldFormData.type}
           onChange={(e) => onChangeMethod(e, "type")}
         >
           <option value={"text"} defaultChecked={true}>
@@ -99,7 +99,7 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
           className={`editorField`}
           type="text"
           placeholder="Choose a text field placeholder"
-          defaultValue={textFieldFormData.placeholder}
+          value={textFieldFormData.placeholder}
           onChange={(e) => onChangeMethod(e, "placeholder")}
         />
       </div>
@@ -109,7 +109,7 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
           className={`editorField`}
           type="text"
           placeholder="Choose a text field default value"
-          defaultValue={textFieldFormData.defaultValue}
+          value={textFieldFormData.defaultValue}
           onChange={(e) => onChangeMethod(e, "defaultValue")}
         />
       </div>

@@ -6,39 +6,39 @@ import EditorAddFieldForm from "../Editor/EditorAddFieldForm/EditorAddFieldForm"
 
 function FormEditor() {
   const [dataFields, setDataFields] = useState([
-    {
-      key: 1,
-      type: "text",
-      specs: {
-        label: "Full Name",
-        inputType: "text",
-        placeholder: "Enter text here",
-        defaultValue: "Joe Shmo",
-      },
-    },
-    {
-      key: 2,
-      type: "dropdown",
-      specs: {
-        label: "Profession",
-        options: [
-          {
-            key: 1,
-            text: "opt 1",
-          },
-          {
-            key: 2,
-            text: "opt 2",
-          },
-          {
-            key: 3,
-            text: "opt 3",
-          },
-        ],
-        placeholder: "Choose an option",
-        defaultValue: "opt 3",
-      },
-    },
+    // {
+    //   key: 1,
+    //   type: "text",
+    //   specs: {
+    //     label: "Full Name",
+    //     inputType: "text",
+    //     placeholder: "Enter text here",
+    //     defaultValue: "Joe Shmo",
+    //   },
+    // },
+    // {
+    //   key: 2,
+    //   type: "dropdown",
+    //   specs: {
+    //     label: "Profession",
+    //     options: [
+    //       {
+    //         key: 1,
+    //         text: "opt 1",
+    //       },
+    //       {
+    //         key: 2,
+    //         text: "opt 2",
+    //       },
+    //       {
+    //         key: 3,
+    //         text: "opt 3",
+    //       },
+    //     ],
+    //     placeholder: "Choose an option",
+    //     defaultValue: "opt 3",
+    //   },
+    // },
   ]);
   const addNewDataFieldHandler = (fieldObject) => {
     setDataFields([...dataFields, fieldObject]);
