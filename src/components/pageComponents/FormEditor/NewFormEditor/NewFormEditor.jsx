@@ -14,6 +14,7 @@ function FormEditor() {
     //     inputType: "text",
     //     placeholder: "Enter text here",
     //     defaultValue: "Joe Shmo",
+    //     fieldRequired: false,
     //   },
     // },
     // {
@@ -37,18 +38,26 @@ function FormEditor() {
     //     ],
     //     placeholder: "Choose an option",
     //     defaultValue: "opt 3",
+    //     fieldRequired: true,
     //   },
     // },
   ]);
   const addNewDataFieldHandler = (fieldObject) => {
     setDataFields([...dataFields, fieldObject]);
   };
+  const removeDataFieldHandler = (key) => {
+    const updatedFieldsList = dataFields.filter((field) => field.key != key);
+    setDataFields(updatedFieldsList);
+  };
   return (
     <div className="PageContainer">
       <h4 className="pageTitle">Create a new form</h4>
       <div className="pageContent">
         <EditorAddFieldForm addNewDataFieldHandler={addNewDataFieldHandler} />
-        <EditorViewer dataFields={dataFields} />
+        <EditorViewer
+          dataFields={dataFields}
+          removeDataFieldHandler={removeDataFieldHandler}
+        />
       </div>
     </div>
   );

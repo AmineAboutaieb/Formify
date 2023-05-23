@@ -1,0 +1,17 @@
+.editorControlOptions{
+    display:flex;
+    width:96%;
+    margin:0 auto 10px auto;
+    justify-content:flex-end;
+    column-gap:15px;
+    
+}
+
+.editorOptionIcon{
+    color:var(--text_primary_color);
+    cursor:pointer;
+}
+
+.editorOptionIcon:hover{
+    color:var(--app_accent_color);
+}
