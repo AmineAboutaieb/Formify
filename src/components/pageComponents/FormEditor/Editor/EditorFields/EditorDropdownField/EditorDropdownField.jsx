@@ -4,7 +4,10 @@ import "../../../../../../styles/sharedEditorFieldStyles.css";
 function EditorDropdownField({ specs }) {
   return (
     <div className="editorFieldContainer">
-      <label className="editorFieldLabel">{specs.label}</label>
+      <label className="editorFieldLabel">
+        {specs.label}
+        {specs.fieldRequired && <span className="notValidTextColor"> *</span>}
+      </label>
       <select
         className="editorField"
         type={specs.inputType}

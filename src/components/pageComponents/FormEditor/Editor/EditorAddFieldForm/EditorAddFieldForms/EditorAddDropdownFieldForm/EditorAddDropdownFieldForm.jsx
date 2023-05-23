@@ -3,6 +3,7 @@ import "../../../../../../../styles/sharedEditorFieldStyles.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 as uuidv4, v4 } from "uuid";
 import DropdownOptionsSelector from "./DropdownOptionsSelector/DropdownOptionsSelector";
+import Switcher from "../../../../../../switcher/Switcher";
 
 function EditorAddDropdownFieldForm({
   addNewDataFieldHandler,
@@ -13,6 +14,7 @@ function EditorAddDropdownFieldForm({
     options: [],
     placeholder: "",
     defaultValue: "",
+    fieldRequired: true,
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: true,
@@ -47,6 +49,7 @@ function EditorAddDropdownFieldForm({
         options: dropdownFieldFormData.options,
         placeholder: dropdownFieldFormData.placeholder,
         defaultValue: dropdownFieldFormData.defaultValue,
+        fieldRequired: dropdownFieldFormData.fieldRequired,
       },
     };
     addNewDataFieldHandler(newFieldObject);
@@ -55,6 +58,7 @@ function EditorAddDropdownFieldForm({
       options: "",
       placeholder: "",
       defaultValue: "",
+      fieldRequired: true,
     });
     toggleFormHandler();
   };
@@ -71,6 +75,15 @@ function EditorAddDropdownFieldForm({
       ...prevState,
       options: prevState.options.filter((opt) => opt.key != key),
     }));
+  };
+
+  const toggleFieldIsRequiredHandler = () => {
+    setDropdownFieldFormData((prevState) => {
+      return {
+        ...dropdownFieldFormData,
+        fieldRequired: !prevState.fieldRequired,
+      };
+    });
   };
 
   return (
@@ -117,6 +130,13 @@ function EditorAddDropdownFieldForm({
           removeOptionHandler={removeOptionHandler}
         />
       </div>
+      <div className="editorFieldContainer">
+        <Switcher
+          isOn={dropdownFieldFormData.fieldRequired}
+          handleToggle={toggleFieldIsRequiredHandler}
+        />
+      </div>
+
       <div className="editorButtonContainer">
         <AppButtonPrimary
           text={"Create"}

@@ -32,6 +32,10 @@
     margin-left:3px;
 }
 
+.notValidTextColor{
+    color:var(--app_not_valid_red_color);
+}
+
 .editorField:focus{
     outline:none;
 }

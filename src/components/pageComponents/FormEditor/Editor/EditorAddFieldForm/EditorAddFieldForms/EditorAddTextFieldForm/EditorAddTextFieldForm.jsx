@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../../../../../../styles/sharedEditorFieldStyles.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 as uuidv4, v4 } from "uuid";
+import Switcher from "../../../../../../switcher/Switcher";
 
 function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
   const [textFieldFormData, setTextFieldFormData] = useState({
@@ -9,6 +10,7 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
     type: "text",
     placeholder: "",
     defaultValue: "",
+    fieldRequired: true,
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: true,
@@ -44,6 +46,7 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
         inputType: textFieldFormData.type,
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
+        fieldRequired: textFieldFormData.fieldRequired,
       },
     };
     addNewDataFieldHandler(newFieldObject);
@@ -52,8 +55,15 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
       type: "",
       placeholder: "",
       defaultValue: "",
+      fieldRequired: true,
     });
     toggleFormHandler();
+  };
+
+  const toggleFieldIsRequiredHandler = () => {
+    setTextFieldFormData((prevState) => {
+      return { ...textFieldFormData, fieldRequired: !prevState.fieldRequired };
+    });
   };
 
   return (
@@ -111,6 +121,13 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
           placeholder="Choose a text field default value"
           value={textFieldFormData.defaultValue}
           onChange={(e) => onChangeMethod(e, "defaultValue")}
+        />
+      </div>
+      <div className="editorFieldContainer">
+        <label className="editorFieldLabel">Field is required</label>
+        <Switcher
+          isOn={textFieldFormData.fieldRequired}
+          handleToggle={toggleFieldIsRequiredHandler}
         />
       </div>
       <div className="editorButtonContainer">
