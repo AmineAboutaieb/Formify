@@ -16,6 +16,11 @@ function EditorDropdownField({ fieldKey, removeDataFieldHandler, specs }) {
           placeholder={specs.placeholder}
           defaultValue={specs.defaultValue}
         >
+          {specs.placeholder.trim() != "" && (
+            <option value="" disabled>
+              {specs.placeholder}
+            </option>
+          )}
           {specs.options.map((opt) => {
             return <option key={opt.key}>{opt.text}</option>;
           })}
