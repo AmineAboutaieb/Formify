@@ -4,6 +4,9 @@ import "../../../../../../styles/sharedEditorFieldStyles.css";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { MoveUp } from "@mui/icons-material";
 
 function EditorFieldOptions({
   fieldKey,
@@ -11,6 +14,9 @@ function EditorFieldOptions({
   setShowFormDisplayer,
   setFormDisplayerMode,
   setFieldToModifyDataHandler,
+  duplicateField,
+  moveFieldUp,
+  moveFieldDown,
 }) {
   const showEditFormHandler = () => {
     setFormDisplayerMode("edit");
@@ -24,7 +30,18 @@ function EditorFieldOptions({
         className="editorOptionIcon"
         onClick={() => removeDataFieldHandler(fieldKey)}
       />
-      <ContentCopyIcon className="editorOptionIcon" />
+      <ContentCopyIcon
+        className="editorOptionIcon"
+        onClick={() => duplicateField(fieldKey)}
+      />
+      <ArrowUpwardIcon
+        className="editorOptionIcon"
+        onClick={() => moveFieldUp(fieldKey)}
+      />
+      <ArrowDownwardIcon
+        className="editorOptionIcon"
+        onClick={() => moveFieldDown(fieldKey)}
+      />
     </div>
   );
 }

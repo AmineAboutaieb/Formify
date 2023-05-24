@@ -9,6 +9,9 @@ function EditorDropdownField({
   setShowFormDisplayer,
   setFormDisplayerMode,
   setFieldToModifyDataHandler,
+  duplicateField,
+  moveFieldUp,
+  moveFieldDown,
 }) {
   return (
     <div>
@@ -23,9 +26,14 @@ function EditorDropdownField({
           placeholder={specs.placeholder}
           key={specs.defaultValue}
           defaultValue={specs.defaultValue}
+          required={specs.fieldRequired}
         >
           {specs.placeholder.trim() != "" && (
-            <option value="" disabled>
+            <option
+              value=""
+              selected={true}
+              disabled={specs.fieldRequired ? true : false}
+            >
               {specs.placeholder}
             </option>
           )}
@@ -40,6 +48,9 @@ function EditorDropdownField({
         setShowFormDisplayer={setShowFormDisplayer}
         setFormDisplayerMode={setFormDisplayerMode}
         setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+        duplicateField={duplicateField}
+        moveFieldUp={moveFieldUp}
+        moveFieldDown={moveFieldDown}
       />
     </div>
   );

@@ -9,6 +9,9 @@ function EditorTextField({
   setShowFormDisplayer,
   setFormDisplayerMode,
   setFieldToModifyDataHandler,
+  duplicateField,
+  moveFieldUp,
+  moveFieldDown,
 }) {
   return (
     <div>
@@ -23,6 +26,7 @@ function EditorTextField({
           placeholder={specs.placeholder}
           key={specs.defaultValue}
           defaultValue={specs.defaultValue}
+          required={specs.fieldRequired}
         />
       </div>
       <EditorFieldOptions
@@ -31,6 +35,9 @@ function EditorTextField({
         setShowFormDisplayer={setShowFormDisplayer}
         setFormDisplayerMode={setFormDisplayerMode}
         setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+        duplicateField={duplicateField}
+        moveFieldUp={moveFieldUp}
+        moveFieldDown={moveFieldDown}
       />
     </div>
   );

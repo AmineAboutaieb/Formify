@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../../../../../../styles/sharedEditorFieldStyles.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 as uuidv4, v4 } from "uuid";
@@ -12,10 +12,6 @@ function EditorAddDropdownFieldForm({
   fieldToModifyData,
   editDataFieldHandler,
 }) {
-  useEffect(() => {
-    console.log("from dropdown editor : ", formDisplayerMode);
-    console.log("from dropdown editor", fieldToModifyData);
-  }, []);
   const [dropdownFieldFormData, setDropdownFieldFormData] = useState({
     label: formDisplayerMode === "edit" ? fieldToModifyData.specs.label : "",
     options:

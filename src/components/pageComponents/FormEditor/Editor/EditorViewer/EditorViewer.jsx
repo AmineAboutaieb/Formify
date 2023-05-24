@@ -9,9 +9,15 @@ function EditorViewer({
   setShowFormDisplayer,
   setFormDisplayerMode,
   setFieldToModifyDataHandler,
+  duplicateField,
+  moveFieldUp,
+  moveFieldDown,
 }) {
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+  };
   return (
-    <>
+    <form onSubmit={formSubmitHandler}>
       {dataFields.map((item) => {
         let { key, type, specs } = item;
         if (type == "text") {
@@ -24,6 +30,9 @@ function EditorViewer({
               setShowFormDisplayer={setShowFormDisplayer}
               setFormDisplayerMode={setFormDisplayerMode}
               setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
             />
           );
         } else if (type == "dropdown") {
@@ -36,11 +45,14 @@ function EditorViewer({
               setShowFormDisplayer={setShowFormDisplayer}
               setFormDisplayerMode={setFormDisplayerMode}
               setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
             />
           );
         }
       })}
-    </>
+    </form>
   );
 }
 
