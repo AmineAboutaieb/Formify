@@ -4,16 +4,27 @@ import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 as uuidv4, v4 } from "uuid";
 import Switcher from "../../../../../../switcher/Switcher";
 
-function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
+function EditorAddTextFieldForm({
+  addNewDataFieldHandler,
+  toggleFormHandler,
+  formDisplayerMode,
+  fieldToModifyData,
+  editDataFieldHandler,
+}) {
   const [textFieldFormData, setTextFieldFormData] = useState({
-    label: "",
-    type: "text",
-    placeholder: "",
-    defaultValue: "",
-    fieldRequired: true,
+    label: formDisplayerMode === "edit" ? fieldToModifyData.specs.label : "",
+    type: formDisplayerMode === "edit" ? fieldToModifyData.type : "text",
+    placeholder:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.placeholder : "",
+    defaultValue:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.defaultValue : "",
+    fieldRequired:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.fieldRequired
+        : true,
   });
   const [formDataValidation, setFormDataValidation] = useState({
-    label: true,
+    label: formDisplayerMode === "edit" ? false : true,
     type: false,
   });
 
@@ -50,6 +61,29 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
       },
     };
     addNewDataFieldHandler(newFieldObject);
+    setTextFieldFormData({
+      label: "",
+      type: "",
+      placeholder: "",
+      defaultValue: "",
+      fieldRequired: true,
+    });
+    toggleFormHandler();
+  };
+
+  const editFieldObject = () => {
+    let newFieldObject = {
+      key: fieldToModifyData.key,
+      type: fieldToModifyData.type,
+      specs: {
+        label: textFieldFormData.label,
+        inputType: textFieldFormData.type,
+        placeholder: textFieldFormData.placeholder,
+        defaultValue: textFieldFormData.defaultValue,
+        fieldRequired: textFieldFormData.fieldRequired,
+      },
+    };
+    editDataFieldHandler(newFieldObject);
     setTextFieldFormData({
       label: "",
       type: "",
@@ -132,11 +166,13 @@ function EditorAddTextFieldForm({ addNewDataFieldHandler, toggleFormHandler }) {
       </div>
       <div className="editorButtonContainer">
         <AppButtonPrimary
-          text={"Create"}
+          text={formDisplayerMode === "add" ? "Create" : "Modify"}
           disabled={
             formDataValidation.label || formDataValidation.type ? true : false
           }
-          clickHandler={createNewFieldObject}
+          clickHandler={
+            formDisplayerMode === "add" ? createNewFieldObject : editFieldObject
+          }
         />
       </div>
     </>

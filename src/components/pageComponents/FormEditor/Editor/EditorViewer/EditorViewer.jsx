@@ -3,7 +3,13 @@ import "./editorViewer.css";
 import EditorTextField from "../EditorFields/EditorTextField/EditorTextField";
 import EditorDropdownField from "../EditorFields/EditorDropdownField/EditorDropdownField";
 
-function EditorViewer({ dataFields, removeDataFieldHandler }) {
+function EditorViewer({
+  dataFields,
+  removeDataFieldHandler,
+  setShowFormDisplayer,
+  setFormDisplayerMode,
+  setFieldToModifyDataHandler,
+}) {
   return (
     <>
       {dataFields.map((item) => {
@@ -15,6 +21,9 @@ function EditorViewer({ dataFields, removeDataFieldHandler }) {
               fieldKey={key}
               specs={specs}
               removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
             />
           );
         } else if (type == "dropdown") {
@@ -24,6 +33,9 @@ function EditorViewer({ dataFields, removeDataFieldHandler }) {
               fieldKey={key}
               specs={specs}
               removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
             />
           );
         }

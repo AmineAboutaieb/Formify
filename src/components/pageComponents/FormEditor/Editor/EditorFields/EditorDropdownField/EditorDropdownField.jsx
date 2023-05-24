@@ -2,7 +2,14 @@ import React from "react";
 import "../../../../../../styles/sharedEditorFieldStyles.css";
 import EditorFieldOptions from "../EditorFieldOptions/EditorFieldOptions";
 
-function EditorDropdownField({ fieldKey, removeDataFieldHandler, specs }) {
+function EditorDropdownField({
+  fieldKey,
+  removeDataFieldHandler,
+  specs,
+  setShowFormDisplayer,
+  setFormDisplayerMode,
+  setFieldToModifyDataHandler,
+}) {
   return (
     <div>
       <div className="editorFieldContainer">
@@ -14,6 +21,7 @@ function EditorDropdownField({ fieldKey, removeDataFieldHandler, specs }) {
           className="editorField"
           type={specs.inputType}
           placeholder={specs.placeholder}
+          key={specs.defaultValue}
           defaultValue={specs.defaultValue}
         >
           {specs.placeholder.trim() != "" && (
@@ -29,6 +37,9 @@ function EditorDropdownField({ fieldKey, removeDataFieldHandler, specs }) {
       <EditorFieldOptions
         fieldKey={fieldKey}
         removeDataFieldHandler={removeDataFieldHandler}
+        setShowFormDisplayer={setShowFormDisplayer}
+        setFormDisplayerMode={setFormDisplayerMode}
+        setFieldToModifyDataHandler={setFieldToModifyDataHandler}
       />
     </div>
   );

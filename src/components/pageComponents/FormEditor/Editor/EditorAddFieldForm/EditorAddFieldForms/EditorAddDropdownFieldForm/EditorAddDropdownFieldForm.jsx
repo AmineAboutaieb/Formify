@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../../../../../styles/sharedEditorFieldStyles.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 as uuidv4, v4 } from "uuid";
@@ -8,16 +8,33 @@ import Switcher from "../../../../../../switcher/Switcher";
 function EditorAddDropdownFieldForm({
   addNewDataFieldHandler,
   toggleFormHandler,
+  formDisplayerMode,
+  fieldToModifyData,
+  editDataFieldHandler,
 }) {
+  useEffect(() => {
+    console.log("from dropdown editor : ", formDisplayerMode);
+    console.log("from dropdown editor", fieldToModifyData);
+  }, []);
   const [dropdownFieldFormData, setDropdownFieldFormData] = useState({
-    label: "",
-    options: [],
-    placeholder: "",
-    defaultValue: "",
-    fieldRequired: true,
+    label: formDisplayerMode === "edit" ? fieldToModifyData.specs.label : "",
+    options:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.options : [],
+    placeholder:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.placeholder
+        : formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.placeholder
+        : "",
+    defaultValue:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.defaultValue : "",
+    fieldRequired:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.fieldRequired
+        : true,
   });
   const [formDataValidation, setFormDataValidation] = useState({
-    label: true,
+    label: formDisplayerMode === "edit" ? false : true,
   });
 
   const validationVerifier = (e, param) => {
@@ -53,6 +70,29 @@ function EditorAddDropdownFieldForm({
       },
     };
     addNewDataFieldHandler(newFieldObject);
+    setDropdownFieldFormData({
+      label: "",
+      options: "",
+      placeholder: "",
+      defaultValue: "",
+      fieldRequired: true,
+    });
+    toggleFormHandler();
+  };
+
+  const editFieldObject = () => {
+    let newFieldObject = {
+      key: fieldToModifyData.key,
+      type: fieldToModifyData.type,
+      specs: {
+        label: dropdownFieldFormData.label,
+        options: dropdownFieldFormData.options,
+        placeholder: dropdownFieldFormData.placeholder,
+        defaultValue: dropdownFieldFormData.defaultValue,
+        fieldRequired: dropdownFieldFormData.fieldRequired,
+      },
+    };
+    editDataFieldHandler(newFieldObject);
     setDropdownFieldFormData({
       label: "",
       options: "",
@@ -128,6 +168,7 @@ function EditorAddDropdownFieldForm({
         <DropdownOptionsSelector
           addNewOptionHandler={addNewOptionHandler}
           removeOptionHandler={removeOptionHandler}
+          options={dropdownFieldFormData.options}
         />
       </div>
       <div className="editorFieldContainer">
@@ -139,14 +180,16 @@ function EditorAddDropdownFieldForm({
 
       <div className="editorButtonContainer">
         <AppButtonPrimary
-          text={"Create"}
+          text={formDisplayerMode === "add" ? "Create" : "Modify"}
           disabled={
             formDataValidation.label ||
             dropdownFieldFormData.options.length <= 0
               ? true
               : false
           }
-          clickHandler={createNewFieldObject}
+          clickHandler={
+            formDisplayerMode === "add" ? createNewFieldObject : editFieldObject
+          }
         />
       </div>
     </>

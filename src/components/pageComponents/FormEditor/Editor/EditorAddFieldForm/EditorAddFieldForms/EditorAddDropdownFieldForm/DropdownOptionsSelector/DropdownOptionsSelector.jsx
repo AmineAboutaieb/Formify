@@ -7,8 +7,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { v4 as uuidv4, v4 } from "uuid";
 
-function DropdownOptionsSelector({ addNewOptionHandler, removeOptionHandler }) {
-  const [options, setOptions] = useState([]);
+function DropdownOptionsSelector({
+  addNewOptionHandler,
+  removeOptionHandler,
+  options,
+}) {
   const [optionInput, setOptionInput] = useState("");
   const [optionInputValidation, setOptionInputValidation] = useState(false);
   const onChangeMethod = (e) => {
@@ -23,7 +26,6 @@ function DropdownOptionsSelector({ addNewOptionHandler, removeOptionHandler }) {
     } else {
       setOptionInputValidation(false);
       let newOption = { key: v4(), text: optionInput };
-      setOptions([...options, newOption]);
       addNewOptionHandler(newOption);
       setOptionInput("");
     }
@@ -69,9 +71,6 @@ function DropdownOptionsSelector({ addNewOptionHandler, removeOptionHandler }) {
               <DeleteIcon
                 className="dropdownOptionDisplayerOptionIcon"
                 onClick={() => {
-                  setOptions((prevState) =>
-                    prevState.filter((elm) => elm.key != opt.key)
-                  );
                   removeOptionHandler(opt.key);
                 }}
               />
