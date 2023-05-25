@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../../../styles/sharedPageStyles.css";
 import "./newFormEditor.css";
 import EditorViewer from "../Editor/EditorViewer/EditorViewer";
@@ -7,7 +7,42 @@ import EditorFormDisplayer from "../Editor/EditorAddFieldForm/EditorFormDisplaye
 import { v4 } from "uuid";
 
 function FormEditor() {
-  const [dataFields, setDataFields] = useState([]);
+  const [dataFields, setDataFields] = useState([
+    {
+      key: "57e49aca-999b-4f14-b401-3b2d0cb12c22",
+      type: "text",
+      specs: {
+        label: "First name",
+        placeholder: "Your first name (required)",
+        defaultValue: "",
+        fieldRequired: true,
+      },
+    },
+    {
+      key: "65df7820-45b7-4113-8985-073ddccab112",
+      type: "text",
+      specs: {
+        label: "Last name",
+        placeholder: "Your last name (required)",
+        defaultValue: "",
+        fieldRequired: true,
+      },
+    },
+    {
+      key: "1fe37a7e-e87d-43ee-ace4-ec1db5b91f71",
+      type: "dropdown",
+      specs: {
+        label: "Gender",
+        options: [
+          { key: 1, text: "Male" },
+          { key: 2, text: "Female" },
+        ],
+        placeholder: "Your gender (required)",
+        defaultValue: "",
+        fieldRequired: true,
+      },
+    },
+  ]);
   const [showFormDisplayer, setShowFormDisplayer] = useState(false);
   const [formDisplayerMode, setFormDisplayerMode] = useState("add");
   const [fieldToModifyData, setFieldToModifyData] = useState(null);

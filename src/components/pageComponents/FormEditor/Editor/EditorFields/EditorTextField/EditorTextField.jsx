@@ -22,7 +22,7 @@ function EditorTextField({
         </label>
         <input
           className="editorField"
-          type={specs.inputType}
+          type="text"
           placeholder={specs.placeholder}
           key={specs.defaultValue}
           defaultValue={specs.defaultValue}

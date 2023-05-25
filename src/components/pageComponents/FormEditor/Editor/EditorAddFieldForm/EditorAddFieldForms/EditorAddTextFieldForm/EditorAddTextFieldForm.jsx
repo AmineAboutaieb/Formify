@@ -13,7 +13,6 @@ function EditorAddTextFieldForm({
 }) {
   const [textFieldFormData, setTextFieldFormData] = useState({
     label: formDisplayerMode === "edit" ? fieldToModifyData.specs.label : "",
-    type: formDisplayerMode === "edit" ? fieldToModifyData.type : "text",
     placeholder:
       formDisplayerMode === "edit" ? fieldToModifyData.specs.placeholder : "",
     defaultValue:
@@ -25,7 +24,6 @@ function EditorAddTextFieldForm({
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: formDisplayerMode === "edit" ? false : true,
-    type: false,
   });
 
   const validationVerifier = (e, param) => {
@@ -54,7 +52,6 @@ function EditorAddTextFieldForm({
       type: "text",
       specs: {
         label: textFieldFormData.label,
-        inputType: textFieldFormData.type,
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
@@ -74,10 +71,8 @@ function EditorAddTextFieldForm({
   const editFieldObject = () => {
     let newFieldObject = {
       key: fieldToModifyData.key,
-      type: fieldToModifyData.type,
       specs: {
         label: textFieldFormData.label,
-        inputType: textFieldFormData.type,
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
@@ -86,7 +81,6 @@ function EditorAddTextFieldForm({
     editDataFieldHandler(newFieldObject);
     setTextFieldFormData({
       label: "",
-      type: "",
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
@@ -114,26 +108,6 @@ function EditorAddTextFieldForm({
           onChange={(e) => onChangeMethod(e, "label")}
         />
         {formDataValidation.label && (
-          <span className="notValidText">Champ obligatoire *</span>
-        )}
-      </div>
-      <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Text field type</label>
-        <select
-          className={`editorField ${
-            formDataValidation.type ? "notValidFormElement" : ""
-          }`}
-          placeholder="Choose a text field type"
-          value={textFieldFormData.type}
-          onChange={(e) => onChangeMethod(e, "type")}
-        >
-          <option value={"text"} defaultChecked={true}>
-            Text
-          </option>
-          <option value={"email"}>Email</option>
-          <option value={"password"}>Password</option>
-        </select>
-        {formDataValidation.type && (
           <span className="notValidText">Champ obligatoire *</span>
         )}
       </div>

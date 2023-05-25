@@ -25,14 +25,15 @@ function EditorFieldOptions({
   };
   return (
     <div className="editorControlOptions">
+      <ContentCopyIcon
+        className="editorOptionIcon"
+        onClick={() => duplicateField(fieldKey)}
+      />
+
       <EditIcon className="editorOptionIcon" onClick={showEditFormHandler} />
       <DeleteIcon
         className="editorOptionIcon"
         onClick={() => removeDataFieldHandler(fieldKey)}
-      />
-      <ContentCopyIcon
-        className="editorOptionIcon"
-        onClick={() => duplicateField(fieldKey)}
       />
       <ArrowUpwardIcon
         className="editorOptionIcon"

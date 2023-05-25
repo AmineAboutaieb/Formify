@@ -22,7 +22,6 @@ function EditorDropdownField({
         </label>
         <select
           className="editorField"
-          type={specs.inputType}
           placeholder={specs.placeholder}
           key={specs.defaultValue}
           defaultValue={specs.defaultValue}

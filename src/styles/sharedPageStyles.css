@@ -10,8 +10,9 @@
 }
 
 .pageContent{
+    width:70%;
     background-color:var(--body_fourth_background);
-    margin:20px 0 0 0;
+    margin:20px auto;
     /*TO REMOVE DEV ONLY*/
     /* min-height:50vh; */
     border-radius:0.250rem;
