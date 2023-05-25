@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: "16"
 
-      - name: 🔨 Build React Project
+      - name: 🔨 Build Project
         run: |
           npm install --legacy-peer-deps
           npm run build
