@@ -1,11 +1,8 @@
 import React from "react";
 import "./sidebar.css";
-import Close from "@material-ui/icons/Close";
+import Close from "@mui/icons-material/Close";
 import { NavLink } from "react-router-dom";
-// import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-// import SettingsEthernetOutlinedIcon from "@material-ui/icons/CodeOutlined";
-import SettingsEthernetOutlinedIcon from "@mui/icons-material/Code";
 import DataObjectOutlinedIcon from "@mui/icons-material/DataObjectOutlined";
 
 function Sidebar({ showSideBar, setShowSideBar }) {
