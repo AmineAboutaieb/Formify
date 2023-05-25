@@ -2,6 +2,8 @@ import React from "react";
 import "./editorViewer.css";
 import EditorTextField from "../EditorFields/EditorTextField/EditorTextField";
 import EditorDropdownField from "../EditorFields/EditorDropdownField/EditorDropdownField";
+import EditorEmailField from "../EditorFields/EditorEmailField/EditorEmailField";
+import EditorPasswordField from "../EditorFields/EditorPasswordField/EditorPasswordField";
 
 function EditorViewer({
   dataFields,
@@ -38,6 +40,36 @@ function EditorViewer({
         } else if (type == "dropdown") {
           return (
             <EditorDropdownField
+              key={key}
+              fieldKey={key}
+              specs={specs}
+              removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
+            />
+          );
+        } else if (type === "email") {
+          return (
+            <EditorEmailField
+              key={key}
+              fieldKey={key}
+              specs={specs}
+              removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
+            />
+          );
+        } else if (type === "password") {
+          return (
+            <EditorPasswordField
               key={key}
               fieldKey={key}
               specs={specs}

@@ -4,6 +4,8 @@ import CustomModal from "../../../../../Modal/Modal";
 import "../../../../../../styles/sharedEditorFieldStyles.css";
 import EditorAddTextFieldForm from "../EditorAddFieldForms/EditorAddTextFieldForm/EditorAddTextFieldForm";
 import EditorAddDropdownFieldForm from "../EditorAddFieldForms/EditorAddDropdownFieldForm/EditorAddDropdownFieldForm";
+import EditorAddEmailFieldForm from "../EditorAddFieldForms/EditorAddEmailFieldForm/EditorAddEmailFieldForm";
+import EditorAddPasswordFieldForm from "../EditorAddFieldForms/EditorAddPasswordFieldForm/EditorAddPasswordFieldForm";
 
 function EditorFormDisplayer({
   setShowFormDisplayer,
@@ -46,6 +48,8 @@ function EditorFormDisplayer({
             disabled={formDisplayerMode === "add" ? false : true}
           >
             <option value="text">Text</option>
+            <option value="email">Email</option>
+            <option value="password">Password</option>
             <option value="dropdown">Dropdown</option>
           </select>
         </div>
@@ -61,6 +65,24 @@ function EditorFormDisplayer({
           )}
           {newFieldTypeDropdownValue === "dropdown" && (
             <EditorAddDropdownFieldForm
+              addNewDataFieldHandler={addNewDataFieldHandler}
+              toggleFormHandler={toggleFormHandler}
+              formDisplayerMode={formDisplayerMode}
+              fieldToModifyData={fieldToModifyData}
+              editDataFieldHandler={editDataFieldHandler}
+            />
+          )}
+          {newFieldTypeDropdownValue === "email" && (
+            <EditorAddEmailFieldForm
+              addNewDataFieldHandler={addNewDataFieldHandler}
+              toggleFormHandler={toggleFormHandler}
+              formDisplayerMode={formDisplayerMode}
+              fieldToModifyData={fieldToModifyData}
+              editDataFieldHandler={editDataFieldHandler}
+            />
+          )}
+          {newFieldTypeDropdownValue === "password" && (
+            <EditorAddPasswordFieldForm
               addNewDataFieldHandler={addNewDataFieldHandler}
               toggleFormHandler={toggleFormHandler}
               formDisplayerMode={formDisplayerMode}
