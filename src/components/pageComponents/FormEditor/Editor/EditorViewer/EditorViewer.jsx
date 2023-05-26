@@ -5,6 +5,7 @@ import EditorTextField from "../EditorFields/EditorTextField/EditorTextField";
 import EditorDropdownField from "../EditorFields/EditorDropdownField/EditorDropdownField";
 import EditorEmailField from "../EditorFields/EditorEmailField/EditorEmailField";
 import EditorPasswordField from "../EditorFields/EditorPasswordField/EditorPasswordField";
+import EditorNumberField from "../EditorFields/EditorNumberField/EditorNumberField";
 
 function EditorViewer({
   dataFields,
@@ -73,6 +74,21 @@ function EditorViewer({
         } else if (type === "password") {
           return (
             <EditorPasswordField
+              key={key}
+              fieldKey={key}
+              specs={specs}
+              removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
+            />
+          );
+        } else if (type === "number") {
+          return (
+            <EditorNumberField
               key={key}
               fieldKey={key}
               specs={specs}
