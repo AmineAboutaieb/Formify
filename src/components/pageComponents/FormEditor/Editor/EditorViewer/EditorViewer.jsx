@@ -1,5 +1,6 @@
 import React from "react";
 import "./editorViewer.css";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import EditorTextField from "../EditorFields/EditorTextField/EditorTextField";
 import EditorDropdownField from "../EditorFields/EditorDropdownField/EditorDropdownField";
 import EditorEmailField from "../EditorFields/EditorEmailField/EditorEmailField";
@@ -15,11 +16,13 @@ function EditorViewer({
   moveFieldUp,
   moveFieldDown,
 }) {
+  const [listRef] = useAutoAnimate();
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
   };
   return (
-    <form onSubmit={formSubmitHandler}>
+    <form onSubmit={formSubmitHandler} ref={listRef}>
       {dataFields.map((item) => {
         let { key, type, specs } = item;
         if (type == "text") {

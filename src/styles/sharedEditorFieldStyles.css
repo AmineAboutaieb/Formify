@@ -6,6 +6,7 @@
 }
 
 .editorFieldLabel{
+    width:fit-content;
     font-size:14px;
     margin-bottom:8px;
     color:var(--text_primary_color);

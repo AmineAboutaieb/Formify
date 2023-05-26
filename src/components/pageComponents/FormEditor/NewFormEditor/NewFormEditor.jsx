@@ -113,6 +113,7 @@ function FormEditor() {
         )}
         <EditorViewer
           dataFields={dataFields}
+          setDataFields={setDataFields}
           removeDataFieldHandler={removeDataFieldHandler}
           setShowFormDisplayer={setShowFormDisplayer}
           setFormDisplayerMode={setFormDisplayerMode}
