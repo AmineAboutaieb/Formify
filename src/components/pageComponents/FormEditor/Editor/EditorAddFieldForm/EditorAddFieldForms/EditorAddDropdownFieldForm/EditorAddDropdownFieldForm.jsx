@@ -168,6 +168,7 @@ function EditorAddDropdownFieldForm({
         />
       </div>
       <div className="editorFieldContainer">
+        <label className="editorFieldLabel">Field is required</label>
         <Switcher
           isOn={dropdownFieldFormData.fieldRequired}
           handleToggle={toggleFieldIsRequiredHandler}
