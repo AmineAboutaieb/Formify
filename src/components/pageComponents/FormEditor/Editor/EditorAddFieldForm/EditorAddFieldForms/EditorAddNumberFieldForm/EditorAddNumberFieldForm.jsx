@@ -21,6 +21,10 @@ function EditorAddNumberFieldForm({
       formDisplayerMode === "edit"
         ? fieldToModifyData.specs.fieldRequired
         : true,
+    minNumber:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.minNumber : "",
+    maxNumber:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.maxNumber : "",
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: formDisplayerMode === "edit" ? false : true,
@@ -55,6 +59,8 @@ function EditorAddNumberFieldForm({
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
+        minNumber: textFieldFormData.minNumber,
+        maxNumber: textFieldFormData.maxNumber,
       },
     };
     addNewDataFieldHandler(newFieldObject);
@@ -64,6 +70,8 @@ function EditorAddNumberFieldForm({
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
+      minNumber: "",
+      maxNumber: "",
     });
     toggleFormHandler();
   };
@@ -76,6 +84,8 @@ function EditorAddNumberFieldForm({
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
+        minNumber: textFieldFormData.minNumber,
+        maxNumber: textFieldFormData.maxNumber,
       },
     };
     editDataFieldHandler(newFieldObject);
@@ -84,6 +94,8 @@ function EditorAddNumberFieldForm({
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
+      minNumber: "",
+      maxNumber: "",
     });
     toggleFormHandler();
   };
@@ -129,6 +141,26 @@ function EditorAddNumberFieldForm({
           placeholder="Choose a number field default value"
           value={textFieldFormData.defaultValue}
           onChange={(e) => onChangeMethod(e, "defaultValue")}
+        />
+      </div>
+      <div className="editorFieldContainer">
+        <label className="editorFieldLabel">Number field minimum value</label>
+        <input
+          className={`editorField`}
+          type="text"
+          placeholder="Choose a number field minimum value"
+          value={textFieldFormData.minNumber}
+          onChange={(e) => onChangeMethod(e, "minNumber")}
+        />
+      </div>
+      <div className="editorFieldContainer">
+        <label className="editorFieldLabel">Number field maximum value</label>
+        <input
+          className={`editorField`}
+          type="text"
+          placeholder="Choose a number field maximum value"
+          value={textFieldFormData.maxNumber}
+          onChange={(e) => onChangeMethod(e, "maxNumber")}
         />
       </div>
       <div className="editorFieldContainer">

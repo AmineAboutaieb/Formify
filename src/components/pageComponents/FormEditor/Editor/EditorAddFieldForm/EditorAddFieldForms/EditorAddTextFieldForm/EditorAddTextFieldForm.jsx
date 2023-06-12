@@ -144,21 +144,21 @@ function EditorAddTextFieldForm({
         />
       </div>
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Text field min length</label>
+        <label className="editorFieldLabel">Text field minimum length</label>
         <input
           className={`editorField`}
           type="number"
-          placeholder="Choose a text field min length"
+          placeholder="Choose a text field minimum length"
           value={textFieldFormData.minLength}
           onChange={(e) => onChangeMethod(e, "minLength")}
         />
       </div>
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Text field max length</label>
+        <label className="editorFieldLabel">Text field maximum length</label>
         <input
           className={`editorField`}
           type="number"
-          placeholder="Choose a text field max length"
+          placeholder="Choose a text field maximum length"
           value={textFieldFormData.maxLength}
           onChange={(e) => onChangeMethod(e, "maxLength")}
         />

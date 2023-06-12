@@ -27,6 +27,9 @@ function EditorNumberField({
           key={specs.defaultValue}
           defaultValue={specs.defaultValue}
           required={specs.fieldRequired}
+          min={specs.minNumber}
+          max={specs.maxNumber}
+          maxLength={specs.maxNumber.length}
         />
       </div>
       <EditorFieldOptions
