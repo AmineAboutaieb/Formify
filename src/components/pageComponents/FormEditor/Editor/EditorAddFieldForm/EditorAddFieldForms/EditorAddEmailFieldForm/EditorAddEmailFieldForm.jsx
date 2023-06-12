@@ -21,6 +21,10 @@ function EditorAddEmailFieldForm({
       formDisplayerMode === "edit"
         ? fieldToModifyData.specs.fieldRequired
         : true,
+    minLength:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.minLength : "",
+    maxLength:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.maxLength : "",
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: formDisplayerMode === "edit" ? false : true,
@@ -55,6 +59,8 @@ function EditorAddEmailFieldForm({
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
+        minLength: textFieldFormData.minLength,
+        maxLength: textFieldFormData.maxLength,
       },
     };
     addNewDataFieldHandler(newFieldObject);
@@ -64,6 +70,8 @@ function EditorAddEmailFieldForm({
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
+      minLength: "",
+      maxLength: "",
     });
     toggleFormHandler();
   };
@@ -76,6 +84,8 @@ function EditorAddEmailFieldForm({
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
+        minLength: textFieldFormData.minLength,
+        maxLength: textFieldFormData.maxLength,
       },
     };
     editDataFieldHandler(newFieldObject);
@@ -84,6 +94,8 @@ function EditorAddEmailFieldForm({
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
+      minLength: "",
+      maxLength: "",
     });
     toggleFormHandler();
   };
@@ -129,6 +141,26 @@ function EditorAddEmailFieldForm({
           placeholder="Choose an email field default value"
           value={textFieldFormData.defaultValue}
           onChange={(e) => onChangeMethod(e, "defaultValue")}
+        />
+      </div>
+      <div className="editorFieldContainer">
+        <label className="editorFieldLabel">Email minimum field length</label>
+        <input
+          className={`editorField`}
+          type="number"
+          placeholder="Choose an minimum field length"
+          value={textFieldFormData.minLength}
+          onChange={(e) => onChangeMethod(e, "minLength")}
+        />
+      </div>
+      <div className="editorFieldContainer">
+        <label className="editorFieldLabel">Email maximum field length</label>
+        <input
+          className={`editorField`}
+          type="number"
+          placeholder="Choose an maximum field length"
+          value={textFieldFormData.maxLength}
+          onChange={(e) => onChangeMethod(e, "maxLength")}
         />
       </div>
       <div className="editorFieldContainer">

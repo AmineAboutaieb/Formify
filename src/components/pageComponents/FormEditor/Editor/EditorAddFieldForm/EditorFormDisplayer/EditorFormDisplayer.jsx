@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Overlay from "../../../../../Modal/Overlay/Overlay";
 import CustomModal from "../../../../../Modal/Modal";
 import "../../../../../../styles/sharedEditorFieldStyles.css";
+import "./editorFormDisplayer.css";
 import EditorAddTextFieldForm from "../EditorAddFieldForms/EditorAddTextFieldForm/EditorAddTextFieldForm";
 import EditorAddDropdownFieldForm from "../EditorAddFieldForms/EditorAddDropdownFieldForm/EditorAddDropdownFieldForm";
 import EditorAddEmailFieldForm from "../EditorAddFieldForms/EditorAddEmailFieldForm/EditorAddEmailFieldForm";
 import EditorAddPasswordFieldForm from "../EditorAddFieldForms/EditorAddPasswordFieldForm/EditorAddPasswordFieldForm";
 import EditorAddNumberFieldForm from "../EditorAddFieldForms/EditorAddNumberFieldForm/EditorAddNumberFieldForm";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 function EditorFormDisplayer({
   setShowFormDisplayer,
@@ -26,7 +26,7 @@ function EditorFormDisplayer({
   const toggleFormHandler = () => {
     setShowFormDisplayer(false);
   };
-  const [formRef] = useAutoAnimate();
+
   return (
     <Overlay
       closeOverlay={(e) =>
@@ -34,13 +34,13 @@ function EditorFormDisplayer({
       }
     >
       <CustomModal
-        ref={formRef}
         modalTitle={
           formDisplayerMode === "add" ? "Add a field" : "Modify field"
         }
         closeOverlay={(e) =>
           e.currentTarget == e.target && setShowFormDisplayer(false)
         }
+        id="addFormModal"
       >
         <div className="editorFieldContainer">
           <label className="editorFieldLabel">Field Type</label>

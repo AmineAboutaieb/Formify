@@ -27,6 +27,8 @@ function EditorPasswordField({
           key={specs.defaultValue}
           defaultValue={specs.defaultValue}
           required={specs.fieldRequired}
+          minLength={specs.minLength}
+          maxLength={specs.maxLength}
         />
       </div>
       <EditorFieldOptions
