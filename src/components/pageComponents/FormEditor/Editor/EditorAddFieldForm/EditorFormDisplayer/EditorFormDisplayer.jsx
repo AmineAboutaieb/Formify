@@ -7,6 +7,7 @@ import EditorAddDropdownFieldForm from "../EditorAddFieldForms/EditorAddDropdown
 import EditorAddEmailFieldForm from "../EditorAddFieldForms/EditorAddEmailFieldForm/EditorAddEmailFieldForm";
 import EditorAddPasswordFieldForm from "../EditorAddFieldForms/EditorAddPasswordFieldForm/EditorAddPasswordFieldForm";
 import EditorAddNumberFieldForm from "../EditorAddFieldForms/EditorAddNumberFieldForm/EditorAddNumberFieldForm";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 function EditorFormDisplayer({
   setShowFormDisplayer,
@@ -25,6 +26,7 @@ function EditorFormDisplayer({
   const toggleFormHandler = () => {
     setShowFormDisplayer(false);
   };
+  const [formRef] = useAutoAnimate();
   return (
     <Overlay
       closeOverlay={(e) =>
@@ -32,6 +34,7 @@ function EditorFormDisplayer({
       }
     >
       <CustomModal
+        ref={formRef}
         modalTitle={
           formDisplayerMode === "add" ? "Add a field" : "Modify field"
         }
