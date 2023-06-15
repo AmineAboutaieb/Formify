@@ -1,20 +1,20 @@
 import React from "react";
 import "./switcher.css";
 
-function Switcher({ isOn, handleToggle }) {
+function Switcher({ isOn, handleToggle, forId }) {
   return (
     <>
       <input
         checked={isOn}
         onChange={handleToggle}
         className="react-switch-checkbox"
-        id={`react-switch-new`}
+        id={forId}
         type="checkbox"
       />
       <label
         style={{ background: isOn && "var(--app_accent_color)" }}
         className="react-switch-label"
-        htmlFor={`react-switch-new`}
+        htmlFor={forId}
       >
         <span className={`react-switch-button`} />
       </label>

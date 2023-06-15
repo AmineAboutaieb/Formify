@@ -168,6 +168,7 @@ function EditorAddTextFieldForm({
         <Switcher
           isOn={textFieldFormData.fieldRequired}
           handleToggle={toggleFieldIsRequiredHandler}
+          forId={"textRequired"}
         />
       </div>
       <div className="editorButtonContainer">
