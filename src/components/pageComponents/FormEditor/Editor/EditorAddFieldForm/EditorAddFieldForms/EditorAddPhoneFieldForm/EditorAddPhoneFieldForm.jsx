@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../../../../../../../styles/sharedEditorFieldStyles.css";
-import "./editorAddPhoneFieldForm.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 as uuidv4, v4 } from "uuid";
 import Switcher from "../../../../../../switcher/Switcher";
 import ReactFlagsSelect from "react-flags-select";
-import PhoneCountryOptionsSelector from "./PhoneCountryOptionsSelector/PhoneOptionsSelector";
+import Countries from "../../../../../../componentsAssets/Countries";
+import PhoneFieldOptionsSelector from "./PhoneFieldOptionsSelector/PhoneFieldOptionsSelector";
+import CustomCountryLabels from "../../../../../../componentsAssets/CustomCountryLabels.json";
 
 function EditorAddPhoneFieldForm({
   addNewDataFieldHandler,
@@ -14,21 +15,9 @@ function EditorAddPhoneFieldForm({
   fieldToModifyData,
   editDataFieldHandler,
 }) {
+  const allCountryCodes = Object.keys(Countries);
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedCountries, setSelectedCountries] = useState([]);
-  const [allCountriesOption, setAllCountriesOption] = useState(true);
-  const [blackListSelectedCountries, setBlackListSelectedCountries] =
-    useState(true);
-
-  const addSelectedCountryHandler = (code) => {
-    if (!allCountriesOption) setSelectedCountries([...selectedCountries, code]);
-  };
-  const removeSelectedCountryHandler = (code) => {
-    let newSelectedCountries = [...selectedCountries];
-    newSelectedCountries = newSelectedCountries.filter((item) => item !== code);
-    setSelectedCountries(newSelectedCountries);
-  };
-  const [textFieldFormData, setTextFieldFormData] = useState({
+  const [phoneFieldFormData, setPhoneFieldFormData] = useState({
     label: formDisplayerMode === "edit" ? fieldToModifyData.specs.label : "",
     placeholder:
       formDisplayerMode === "edit" ? fieldToModifyData.specs.placeholder : "",
@@ -38,10 +27,30 @@ function EditorAddPhoneFieldForm({
       formDisplayerMode === "edit"
         ? fieldToModifyData.specs.fieldRequired
         : true,
-    desiredCountries:
+    showAllCountries:
       formDisplayerMode === "edit"
-        ? fieldToModifyData.specs.desiredCountries
+        ? fieldToModifyData.specs.showAllCountries
+        : true,
+    showAllCountriesDefault:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.showAllCountriesDefault
+        : "",
+    selectedCountries:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.selectedCountries
         : [],
+    selectedCountriesDefault:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.selectedCountriesDefault
+        : "",
+    selectedCountriesBlackListed:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.selectedCountriesBlackListed
+        : true,
+    selectedCountriesBlackListedDefault:
+      formDisplayerMode === "edit"
+        ? fieldToModifyData.specs.selectedCountriesBlackListedDefault
+        : "",
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: formDisplayerMode === "edit" ? false : true,
@@ -59,9 +68,9 @@ function EditorAddPhoneFieldForm({
   };
 
   const onChangeMethod = (e, param) => {
-    let newObj = textFieldFormData;
+    let newObj = phoneFieldFormData;
     newObj[param] = e.target.value;
-    setTextFieldFormData({
+    setPhoneFieldFormData({
       ...newObj,
     });
     validationVerifier(e, param);
@@ -70,23 +79,35 @@ function EditorAddPhoneFieldForm({
   const createNewFieldObject = () => {
     let newFieldObject = {
       key: v4(),
-      type: "text",
+      type: "phone",
       specs: {
-        label: textFieldFormData.label,
-        placeholder: textFieldFormData.placeholder,
-        defaultValue: textFieldFormData.defaultValue,
-        fieldRequired: textFieldFormData.fieldRequired,
-        desiredCountries: textFieldFormData.desiredCountries,
+        label: phoneFieldFormData.label,
+        placeholder: phoneFieldFormData.placeholder,
+        defaultValue: phoneFieldFormData.defaultValue,
+        fieldRequired: phoneFieldFormData.fieldRequired,
+        showAllCountries: phoneFieldFormData.showAllCountries,
+        showAllCountriesDefault: phoneFieldFormData.showAllCountriesDefault,
+        selectedCountries: phoneFieldFormData.selectedCountries,
+        selectedCountriesDefault: phoneFieldFormData.selectedCountriesDefault,
+        selectedCountriesBlackListed:
+          phoneFieldFormData.selectedCountriesBlackListed,
+        selectedCountriesBlackListedDefault:
+          phoneFieldFormData.selectedCountriesBlackListedDefault,
       },
     };
     addNewDataFieldHandler(newFieldObject);
-    setTextFieldFormData({
+    setPhoneFieldFormData({
       label: "",
       type: "",
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
-      desiredCountries: [],
+      showAllCountries: true,
+      showAllCountriesDefault: "",
+      selectedCountries: [],
+      selectedCountriesDefault: "",
+      selectedCountriesBlackListed: true,
+      selectedCountriesBlackListedDefault: "",
     });
     toggleFormHandler();
   };
@@ -95,35 +116,103 @@ function EditorAddPhoneFieldForm({
     let newFieldObject = {
       key: fieldToModifyData.key,
       specs: {
-        label: textFieldFormData.label,
-        placeholder: textFieldFormData.placeholder,
-        defaultValue: textFieldFormData.defaultValue,
-        fieldRequired: textFieldFormData.fieldRequired,
-        desiredCountries: textFieldFormData.desiredCountries,
+        label: phoneFieldFormData.label,
+        placeholder: phoneFieldFormData.placeholder,
+        defaultValue: phoneFieldFormData.defaultValue,
+        fieldRequired: phoneFieldFormData.fieldRequired,
+        showAllCountries: phoneFieldFormData.showAllCountries,
+        showAllCountriesDefault: phoneFieldFormData.showAllCountriesDefault,
+        selectedCountries: phoneFieldFormData.selectedCountries,
+        selectedCountriesDefault: phoneFieldFormData.selectedCountriesDefault,
+        selectedCountriesBlackListed:
+          phoneFieldFormData.selectedCountriesBlackListed,
+        selectedCountriesBlackListedDefault:
+          phoneFieldFormData.selectedCountriesBlackListedDefault,
       },
     };
     editDataFieldHandler(newFieldObject);
-    setTextFieldFormData({
+    setPhoneFieldFormData({
       label: "",
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
-      desiredCountries: [],
+      showAllCountries: true,
+      showAllCountriesDefault: "",
+      selectedCountries: [],
+      selectedCountriesDefault: "",
+      selectedCountriesBlackListed: true,
+      selectedCountriesBlackListedDefault: "",
     });
     toggleFormHandler();
   };
 
   const toggleFieldIsRequiredHandler = () => {
-    setTextFieldFormData((prevState) => {
-      return { ...textFieldFormData, fieldRequired: !prevState.fieldRequired };
+    setPhoneFieldFormData((prevState) => {
+      return { ...prevState, fieldRequired: !prevState.fieldRequired };
     });
   };
-  const toggleAllCountriesOption = () => {
-    setAllCountriesOption((prevState) => !prevState);
+
+  const allowAllCountriesHandler = () => {
+    setPhoneFieldFormData((prevState) => {
+      return {
+        ...prevState,
+        showAllCountries: !prevState.showAllCountries,
+      };
+    });
   };
 
-  const toggleBlackListSelectedCountries = () => {
-    setBlackListSelectedCountries((prevState) => !prevState);
+  const setShowAllCountriesDefaultHandler = (code) => {
+    setPhoneFieldFormData((prevState) => {
+      return {
+        ...prevState,
+        showAllCountriesDefault: code,
+      };
+    });
+  };
+
+  const addSelectedCountriesHandler = (code) => {
+    setPhoneFieldFormData((prevState) => {
+      return {
+        ...prevState,
+        selectedCountries: [...prevState.selectedCountries, code],
+      };
+    });
+  };
+
+  const removeSelectedCountriesHandler = (code) => {
+    setPhoneFieldFormData((prevState) => {
+      let selectedCountriesCp = prevState.selectedCountries;
+      return {
+        ...prevState,
+        selectedCountries: selectedCountriesCp.filter((cntr) => cntr != code),
+      };
+    });
+  };
+
+  const setSelectedCountriesDefaultHandler = (code) => {
+    setPhoneFieldFormData((prevState) => {
+      return {
+        ...prevState,
+        selectedCountriesDefault: code,
+      };
+    });
+  };
+  const setSelectedCountriesBlackListedDefaultHandler = (code) => {
+    setPhoneFieldFormData((prevState) => {
+      return {
+        ...prevState,
+        selectedCountriesBlackListedDefault: code,
+      };
+    });
+  };
+
+  const setSelectedCountriesBlackListedHandler = () => {
+    setPhoneFieldFormData((prevState) => {
+      return {
+        ...prevState,
+        selectedCountriesBlackListed: !prevState.selectedCountriesBlackListed,
+      };
+    });
   };
 
   return (
@@ -136,7 +225,7 @@ function EditorAddPhoneFieldForm({
           }`}
           type="text"
           placeholder="Choose a phone field label"
-          value={textFieldFormData.label}
+          value={phoneFieldFormData.label}
           onChange={(e) => onChangeMethod(e, "label")}
         />
         {formDataValidation.label && (
@@ -144,80 +233,126 @@ function EditorAddPhoneFieldForm({
         )}
       </div>
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Show all countries</label>
+        <label className="editorFieldLabel">Allow all countries</label>
         <Switcher
-          isOn={allCountriesOption}
-          handleToggle={toggleAllCountriesOption}
+          isOn={phoneFieldFormData.showAllCountries}
+          handleToggle={allowAllCountriesHandler}
           forId={"showAllCountries"}
         />
       </div>
-      <div className="editorFieldContainer">
-        <label className="editorFieldLabel">
-          Phone field countries that will be displayed
-        </label>
-        <ReactFlagsSelect
-          searchable
-          selected={selectedCountry}
-          onSelect={(code) => addSelectedCountryHandler(code)}
-          selectButtonClassName="forcedEditorField"
-          fullWidth={false}
-          countries={!allCountriesOption ? selectedCountries : []}
-          blacklistCountries
-          placeholder={
-            allCountriesOption
-              ? "All countries"
-              : "Choose the countries to show"
-          }
-        />
-      </div>
-      {!allCountriesOption && (
+      {/*HANDLE PHONE COUNTRIES LIST HERE (START)*/}
+      {phoneFieldFormData.showAllCountries ? (
+        /*HANDLE ALL COUNTRIES*/
+        <div className="editorFieldContainer">
+          <label className="editorFieldLabel">Select a default country</label>
+          <ReactFlagsSelect
+            placeholder="Select country"
+            searchable={true}
+            selected={phoneFieldFormData.showAllCountriesDefault}
+            onSelect={(code) => setShowAllCountriesDefaultHandler(code)}
+            customLabels={{ ...CustomCountryLabels }}
+          />
+        </div>
+      ) : (
+        /*HANDLE COUNTRY SELECTION*/
         <>
           <div className="editorFieldContainer">
-            <label className="editorFieldLabel">Selected countries</label>
-            <PhoneCountryOptionsSelector
-              removeOptionHandler={removeSelectedCountryHandler}
-              options={selectedCountries}
+            <label className="editorFieldLabel">Add a country the list</label>
+            <ReactFlagsSelect
+              placeholder="Select a country"
+              searchable={true}
+              countries={allCountryCodes.filter(
+                (cnrt) => !phoneFieldFormData.selectedCountries.includes(cnrt)
+              )}
+              selected={selectedCountry}
+              onSelect={(code) => addSelectedCountriesHandler(code)}
+              customLabels={{ ...CustomCountryLabels }}
+            />
+            {!phoneFieldFormData.selectedCountriesBlackListed && (
+              <label className="editorFieldLabel">
+                Click on a listed country to make it default
+              </label>
+            )}
+            <PhoneFieldOptionsSelector
+              options={phoneFieldFormData.selectedCountries}
+              removeOptionHandler={removeSelectedCountriesHandler}
+              setSelectedCountriesDefaultHandler={
+                setSelectedCountriesDefaultHandler
+              }
+              selectedCountriesBlackListed={
+                phoneFieldFormData.selectedCountriesBlackListed
+              }
+              selectedCountriesDefault={
+                phoneFieldFormData.selectedCountriesDefault
+              }
             />
           </div>
           <div className="editorFieldContainer">
             <label className="editorFieldLabel">
-              {blackListSelectedCountries
-                ? "Don't show selected countries"
+              {phoneFieldFormData.selectedCountriesBlackListed
+                ? "Blacklist selected countries"
                 : "Only show selected countries"}
             </label>
             <Switcher
-              isOn={blackListSelectedCountries}
-              handleToggle={toggleBlackListSelectedCountries}
+              isOn={phoneFieldFormData.selectedCountriesBlackListed}
+              handleToggle={setSelectedCountriesBlackListedHandler}
               forId={"blackListSelectedCountries"}
             />
           </div>
+          {!phoneFieldFormData.showAllCountries &&
+            phoneFieldFormData.selectedCountriesBlackListed && (
+              <div className="editorFieldContainer">
+                <label className="editorFieldLabel">
+                  Select a default country
+                </label>
+                <ReactFlagsSelect
+                  placeholder="Select a country"
+                  searchable={true}
+                  countries={allCountryCodes.filter(
+                    (cnrt) =>
+                      !phoneFieldFormData.selectedCountries.includes(cnrt)
+                  )}
+                  selected={
+                    phoneFieldFormData.selectedCountriesBlackListedDefault
+                  }
+                  onSelect={(code) =>
+                    setSelectedCountriesBlackListedDefaultHandler(code)
+                  }
+                  customLabels={{ ...CustomCountryLabels }}
+                />
+              </div>
+            )}
         </>
       )}
-
+      {/*HANDLE PHONE COUNTRIES LIST HERE (STOP)*/}
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Phone field placeholder</label>
         <input
           className={`editorField`}
           type="text"
           placeholder="Choose a phone field placeholder"
-          value={textFieldFormData.placeholder}
+          value={phoneFieldFormData.placeholder}
           onChange={(e) => onChangeMethod(e, "placeholder")}
         />
       </div>
-
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Field is required</label>
         <Switcher
-          isOn={textFieldFormData.fieldRequired}
+          isOn={phoneFieldFormData.fieldRequired}
           handleToggle={toggleFieldIsRequiredHandler}
-          forId={"phoneRequired"}
+          forId={"textRequired"}
         />
       </div>
       <div className="editorButtonContainer">
         <AppButtonPrimary
           text={formDisplayerMode === "add" ? "Create" : "Modify"}
           disabled={
-            formDataValidation.label || formDataValidation.type ? true : false
+            formDataValidation.label ||
+            formDataValidation.type ||
+            (!phoneFieldFormData.showAllCountries &&
+              phoneFieldFormData.selectedCountries.length <= 0)
+              ? true
+              : false
           }
           clickHandler={
             formDisplayerMode === "add" ? createNewFieldObject : editFieldObject

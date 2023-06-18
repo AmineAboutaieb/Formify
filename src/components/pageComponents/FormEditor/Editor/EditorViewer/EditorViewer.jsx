@@ -6,6 +6,7 @@ import EditorDropdownField from "../EditorFields/EditorDropdownField/EditorDropd
 import EditorEmailField from "../EditorFields/EditorEmailField/EditorEmailField";
 import EditorPasswordField from "../EditorFields/EditorPasswordField/EditorPasswordField";
 import EditorNumberField from "../EditorFields/EditorNumberField/EditorNumberField";
+import EditorPhoneField from "../EditorFields/EditorPhoneField/EditorPhoneField";
 
 function EditorViewer({
   dataFields,
@@ -89,6 +90,21 @@ function EditorViewer({
         } else if (type === "number") {
           return (
             <EditorNumberField
+              key={key}
+              fieldKey={key}
+              specs={specs}
+              removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
+            />
+          );
+        } else if (type === "phone") {
+          return (
+            <EditorPhoneField
               key={key}
               fieldKey={key}
               specs={specs}

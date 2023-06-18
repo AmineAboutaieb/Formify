@@ -33,19 +33,18 @@
     cursor:pointer;
 }
 
-.plusIcon:disabled{
-    color:var(--text_primary_muted_color)!important;
-}
-.plusIcon:hover{
-    background-color:var(--app_accent_color)!important;
-}
-.plusIcon:active{
-    background-color:var(--app_accent_color)!important;
-}
-
-.countryLabel{
+.selectecCountriesContainer{
     display:flex;
-    justify-self: center;
     align-items:center;
     column-gap:5px;
+}
+
+.hoverableCountry:hover{
+    color:var(--app_accent_color);
+    cursor:pointer;
+}
+
+.defaultSelectedCountry{
+    color:var(--app_accent_color);
+    font-weight:bold;
 }

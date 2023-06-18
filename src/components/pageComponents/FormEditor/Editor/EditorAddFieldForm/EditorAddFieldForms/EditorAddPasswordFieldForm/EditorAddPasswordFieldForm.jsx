@@ -11,7 +11,7 @@ function EditorAddPasswordFieldForm({
   fieldToModifyData,
   editDataFieldHandler,
 }) {
-  const [textFieldFormData, setTextFieldFormData] = useState({
+  const [textPasswordFormData, setPasswordFieldFormData] = useState({
     label: formDisplayerMode === "edit" ? fieldToModifyData.specs.label : "",
     placeholder:
       formDisplayerMode === "edit" ? fieldToModifyData.specs.placeholder : "",
@@ -42,9 +42,9 @@ function EditorAddPasswordFieldForm({
   };
 
   const onChangeMethod = (e, param) => {
-    let newObj = textFieldFormData;
+    let newObj = textPasswordFormData;
     newObj[param] = e.target.value;
-    setTextFieldFormData({
+    setPasswordFieldFormData({
       ...newObj,
     });
     validationVerifier(e, param);
@@ -55,16 +55,16 @@ function EditorAddPasswordFieldForm({
       key: v4(),
       type: "password",
       specs: {
-        label: textFieldFormData.label,
-        placeholder: textFieldFormData.placeholder,
-        defaultValue: textFieldFormData.defaultValue,
-        fieldRequired: textFieldFormData.fieldRequired,
-        minLength: textFieldFormData.minLength,
-        maxLength: textFieldFormData.maxLength,
+        label: textPasswordFormData.label,
+        placeholder: textPasswordFormData.placeholder,
+        defaultValue: textPasswordFormData.defaultValue,
+        fieldRequired: textPasswordFormData.fieldRequired,
+        minLength: textPasswordFormData.minLength,
+        maxLength: textPasswordFormData.maxLength,
       },
     };
     addNewDataFieldHandler(newFieldObject);
-    setTextFieldFormData({
+    setPasswordFieldFormData({
       label: "",
       type: "",
       placeholder: "",
@@ -80,16 +80,16 @@ function EditorAddPasswordFieldForm({
     let newFieldObject = {
       key: fieldToModifyData.key,
       specs: {
-        label: textFieldFormData.label,
-        placeholder: textFieldFormData.placeholder,
-        defaultValue: textFieldFormData.defaultValue,
-        fieldRequired: textFieldFormData.fieldRequired,
-        minLength: textFieldFormData.minLength,
-        maxLength: textFieldFormData.maxLength,
+        label: textPasswordFormData.label,
+        placeholder: textPasswordFormData.placeholder,
+        defaultValue: textPasswordFormData.defaultValue,
+        fieldRequired: textPasswordFormData.fieldRequired,
+        minLength: textPasswordFormData.minLength,
+        maxLength: textPasswordFormData.maxLength,
       },
     };
     editDataFieldHandler(newFieldObject);
-    setTextFieldFormData({
+    setPasswordFieldFormData({
       label: "",
       placeholder: "",
       defaultValue: "",
@@ -101,8 +101,11 @@ function EditorAddPasswordFieldForm({
   };
 
   const toggleFieldIsRequiredHandler = () => {
-    setTextFieldFormData((prevState) => {
-      return { ...textFieldFormData, fieldRequired: !prevState.fieldRequired };
+    setPasswordFieldFormData((prevState) => {
+      return {
+        ...textPasswordFormData,
+        fieldRequired: !prevState.fieldRequired,
+      };
     });
   };
 
@@ -116,7 +119,7 @@ function EditorAddPasswordFieldForm({
           }`}
           type="text"
           placeholder="Choose a password field label"
-          value={textFieldFormData.label}
+          value={textPasswordFormData.label}
           onChange={(e) => onChangeMethod(e, "label")}
         />
         {formDataValidation.label && (
@@ -129,7 +132,7 @@ function EditorAddPasswordFieldForm({
           className={`editorField`}
           type="text"
           placeholder="Choose a password field placeholder"
-          value={textFieldFormData.placeholder}
+          value={textPasswordFormData.placeholder}
           onChange={(e) => onChangeMethod(e, "placeholder")}
         />
       </div>
@@ -139,7 +142,7 @@ function EditorAddPasswordFieldForm({
           className={`editorField`}
           type="text"
           placeholder="Choose a password field default value"
-          value={textFieldFormData.defaultValue}
+          value={textPasswordFormData.defaultValue}
           onChange={(e) => onChangeMethod(e, "defaultValue")}
         />
       </div>
@@ -151,7 +154,7 @@ function EditorAddPasswordFieldForm({
           className={`editorField`}
           type="text"
           placeholder="Choose a password field minimum length"
-          value={textFieldFormData.minLength}
+          value={textPasswordFormData.minLength}
           onChange={(e) => onChangeMethod(e, "minLength")}
         />
       </div>
@@ -163,14 +166,14 @@ function EditorAddPasswordFieldForm({
           className={`editorField`}
           type="text"
           placeholder="Choose a password field maximum length"
-          value={textFieldFormData.maxLength}
+          value={textPasswordFormData.maxLength}
           onChange={(e) => onChangeMethod(e, "maxLength")}
         />
       </div>
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Field is required</label>
         <Switcher
-          isOn={textFieldFormData.fieldRequired}
+          isOn={textPasswordFormData.fieldRequired}
           handleToggle={toggleFieldIsRequiredHandler}
           forId={"passwordRequired"}
         />
