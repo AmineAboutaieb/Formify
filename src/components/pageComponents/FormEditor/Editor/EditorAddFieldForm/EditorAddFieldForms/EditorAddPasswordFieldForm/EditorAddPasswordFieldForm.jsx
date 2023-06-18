@@ -172,6 +172,7 @@ function EditorAddPasswordFieldForm({
         <Switcher
           isOn={textFieldFormData.fieldRequired}
           handleToggle={toggleFieldIsRequiredHandler}
+          forId={"passwordRequired"}
         />
       </div>
       <div className="editorButtonContainer">

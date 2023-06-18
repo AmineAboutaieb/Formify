@@ -172,6 +172,7 @@ function EditorAddDropdownFieldForm({
         <Switcher
           isOn={dropdownFieldFormData.fieldRequired}
           handleToggle={toggleFieldIsRequiredHandler}
+          forId={"dropdownRequired"}
         />
       </div>
 
