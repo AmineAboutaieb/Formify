@@ -11,7 +11,7 @@ jobs:
         - name: Install Dependencies
           run: |
             npm install
-            npm build
+            npm run build
         - name: deploy file to server
           uses: wlixcc/SFTP-Deploy-Action@v1.2.4
           with:
