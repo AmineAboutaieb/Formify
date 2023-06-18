@@ -17,8 +17,8 @@ jobs:
       - name: deploy file to server
         uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
+          username: "${{ secrets.USERNAME }}"
           server: "${{ secrets.SERVER }}"
-          uername: "${{ secrets.USERNAME }}"
           ssh_private_key: ${{ secrets.SSH_KEY }}
           local_path: "./dist/"
           args: "-o ConnectTimeout=5"
