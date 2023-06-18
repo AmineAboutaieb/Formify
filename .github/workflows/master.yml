@@ -12,12 +12,11 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm build
+          npm run build
 
       - name: deploy file to server
         uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          username: "root"
           server: "${{ secrets.SERVER }}"
           uername: "${{ secrets.USERNAME }}"
           ssh_private_key: ${{ secrets.SSH_KEY }}
