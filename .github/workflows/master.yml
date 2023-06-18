@@ -19,6 +19,6 @@ jobs:
         with:
           username: "${{ secrets.USERNAME }}"
           server: "${{ secrets.SERVER }}"
-          ssh_private_key: "${{ secrets.SSH_KEY }}"
-          local_path: "./dist/"
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: "./dist/*"
           args: "-o ConnectTimeout=5"
