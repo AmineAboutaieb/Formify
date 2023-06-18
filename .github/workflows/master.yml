@@ -19,5 +19,6 @@ jobs:
             server: ${{ secrets.FTP_SERVER }}
             port: 22
             local_path: './dist/*'
+            remote_path: '/home2/aminesrv/public_html'
             sftp_only: true
             password: ${{ secrets.FTP_PASSWORD }}
