@@ -1,0 +1,40 @@
+.menu-flags{
+    /* border:1px solid red; */
+    display:block;
+    /* height:24px; */
+    padding-bottom:0!important;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:none!important;
+
+}
+
+.menu-flags-button{
+    padding-top:4px!important;
+    padding-bottom:4px!important;
+    background-color:var(--body_fourth_background)!important;
+    border:1px solid var(--input_border_color)!important;
+    border-radius:4px!important;
+    color:var(--text_primary_color)!important;
+
+}
+
+.menu-flags-button::after{
+    border-top-color:var(--text_primary_color)!important;
+}
+
+.coutriesContainer{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    justify-content:flex-start;
+    column-gap:5px;
+    flex-wrap:wrap;
+    row-gap: 5px;
+}
+
+.phoneInput{
+    flex:1;
+}
