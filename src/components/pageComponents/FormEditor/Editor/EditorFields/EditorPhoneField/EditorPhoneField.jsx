@@ -108,6 +108,7 @@ function EditorPhoneField({
                 selectButtonClassName="menu-flags-button"
                 selectedSize={14}
                 fullWidth={false}
+                customLabels={{ ...CustomCountryLabels }}
               />
               <input
                 className="editorField phoneInput"
@@ -115,6 +116,10 @@ function EditorPhoneField({
                 placeholder={specs.placeholder}
                 key={specs.defaultValue}
                 defaultValue={specs.defaultValue}
+                onChange={(event) => {
+                  const { value } = event.target;
+                  event.target.value = normalizeCardNumber(value);
+                }}
               />
             </div>
           </>
