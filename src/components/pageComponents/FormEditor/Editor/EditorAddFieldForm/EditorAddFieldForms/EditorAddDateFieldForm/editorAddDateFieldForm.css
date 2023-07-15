@@ -1,0 +1,6 @@
+.allowTimeSwitcher{
+    flex-direction:row;
+    column-gap:5px;
+    justify-content:flex-end;
+    margin-top:5px;
+}
