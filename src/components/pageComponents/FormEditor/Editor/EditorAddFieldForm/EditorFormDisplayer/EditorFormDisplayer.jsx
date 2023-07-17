@@ -10,6 +10,7 @@ import EditorAddPasswordFieldForm from "../EditorAddFieldForms/EditorAddPassword
 import EditorAddNumberFieldForm from "../EditorAddFieldForms/EditorAddNumberFieldForm/EditorAddNumberFieldForm";
 import EditorAddPhoneFieldForm from "../EditorAddFieldForms/EditorAddPhoneFieldForm/EditorAddPhoneFieldForm";
 import EditorAddDateFieldForm from "../EditorAddFieldForms/EditorAddDateFieldForm/EditorAddDateFieldForm";
+import EditorAddTimeFieldForm from "../EditorAddFieldForms/EditorAddTimeFieldForm/EditorAddTimeFieldForm";
 
 function EditorFormDisplayer({
   setShowFormDisplayer,
@@ -60,6 +61,7 @@ function EditorFormDisplayer({
             <option value="dropdown">Dropdown</option>
             <option value="phone">Phone</option>
             <option value="date">Date</option>
+            <option value="time">Time</option>
           </select>
         </div>
         <div className="newFieldFormContainer">
@@ -119,6 +121,15 @@ function EditorFormDisplayer({
           )}
           {newFieldTypeDropdownValue === "date" && (
             <EditorAddDateFieldForm
+              addNewDataFieldHandler={addNewDataFieldHandler}
+              toggleFormHandler={toggleFormHandler}
+              formDisplayerMode={formDisplayerMode}
+              fieldToModifyData={fieldToModifyData}
+              editDataFieldHandler={editDataFieldHandler}
+            />
+          )}
+          {newFieldTypeDropdownValue === "time" && (
+            <EditorAddTimeFieldForm
               addNewDataFieldHandler={addNewDataFieldHandler}
               toggleFormHandler={toggleFormHandler}
               formDisplayerMode={formDisplayerMode}

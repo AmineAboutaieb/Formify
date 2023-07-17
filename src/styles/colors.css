@@ -11,6 +11,7 @@
     --app_accent_color :rgb(255, 96, 96);
     --app_accent_text_color :rgb(255, 255, 255);
     --app_not_valid_red_color :rgb(241, 87, 118);
+    --date_icon_color_mode : light;
 }
 [data-theme="dark"] {
     --body_primary_background : rgb(45, 51, 60);
@@ -25,4 +26,5 @@
     --app_accent_color :rgb(255, 96, 96);
     --app_accent_text_color :rgb(255, 255, 255);
     --app_not_valid_red_color :rgb(247, 154, 173);
+    --date_icon_color_mode : dark;
 }

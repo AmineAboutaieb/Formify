@@ -21,6 +21,14 @@
     color:var(--text_primary_color);
     font-size:16px;
 }
+.editorField[type="date"]{
+    min-width:90%;
+    color-scheme: var(--date_icon_color_mode);
+}
+.editorField[type="time"]{
+    min-width:90%;
+    color-scheme: var(--date_icon_color_mode);
+}
 
 .forcedEditorField{
     padding:7.200px 14.400px;

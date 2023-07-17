@@ -3,9 +3,9 @@ import "../../../../../../../styles/sharedEditorFieldStyles.css";
 import AppButtonPrimary from "../../../../../../appButtons/AppButtonPrimary";
 import { v4 } from "uuid";
 import Switcher from "../../../../../../switcher/Switcher";
-import "./editorAddDateFieldForm.css";
+import "./editorAddTimeFieldForm.css";
 
-function EditorAddDateFieldForm({
+function EditorAddTimeFieldForm({
   addNewDataFieldHandler,
   toggleFormHandler,
   formDisplayerMode,
@@ -22,13 +22,14 @@ function EditorAddDateFieldForm({
       formDisplayerMode === "edit"
         ? fieldToModifyData.specs.fieldRequired
         : true,
-    minDate:
-      formDisplayerMode === "edit" ? fieldToModifyData.specs.minDate : "",
-    maxDate:
-      formDisplayerMode === "edit" ? fieldToModifyData.specs.maxDate : "",
+    minTime:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.minTime : "",
+    maxTime:
+      formDisplayerMode === "edit" ? fieldToModifyData.specs.maxTime : "",
   });
   const [formDataValidation, setFormDataValidation] = useState({
     label: formDisplayerMode === "edit" ? false : true,
+    defaultValue: false,
   });
 
   const validationVerifier = (e, param) => {
@@ -43,25 +44,33 @@ function EditorAddDateFieldForm({
   };
 
   const onChangeMethod = (e, param) => {
+    if (param === "defaultValue") {
+      setFormDataValidation((prevState) => ({
+        ...prevState,
+        defaultValue: !e.target.validity.valid,
+      }));
+    }
     let newObj = textFieldFormData;
     newObj[param] = e.target.value;
     setTextFieldFormData({
       ...newObj,
     });
-    validationVerifier(e, param);
+    if (param === "label") {
+      validationVerifier(e, param);
+    }
   };
 
   const createNewFieldObject = () => {
     let newFieldObject = {
       key: v4(),
-      type: "date",
+      type: "time",
       specs: {
         label: textFieldFormData.label,
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
-        minDate: textFieldFormData.minDate,
-        maxDate: textFieldFormData.maxDate,
+        minTime: textFieldFormData.minTime,
+        maxTime: textFieldFormData.maxTime,
       },
     };
     addNewDataFieldHandler(newFieldObject);
@@ -71,8 +80,8 @@ function EditorAddDateFieldForm({
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
-      minDate: "",
-      maxDate: "",
+      minTime: "",
+      maxTime: "",
     });
     toggleFormHandler();
   };
@@ -85,8 +94,8 @@ function EditorAddDateFieldForm({
         placeholder: textFieldFormData.placeholder,
         defaultValue: textFieldFormData.defaultValue,
         fieldRequired: textFieldFormData.fieldRequired,
-        minDate: textFieldFormData.minDate,
-        maxDate: textFieldFormData.maxDate,
+        minTime: textFieldFormData.minTime,
+        maxTime: textFieldFormData.maxTime,
       },
     };
     editDataFieldHandler(newFieldObject);
@@ -95,8 +104,8 @@ function EditorAddDateFieldForm({
       placeholder: "",
       defaultValue: "",
       fieldRequired: true,
-      minDate: "",
-      maxDate: "",
+      minTime: "",
+      maxTime: "",
     });
     toggleFormHandler();
   };
@@ -107,34 +116,16 @@ function EditorAddDateFieldForm({
     });
   };
 
-  const toggleAllowTimeSelectionHandler = () => {
-    setTextFieldFormData((prevState) => {
-      return { ...textFieldFormData, includeTime: !prevState.includeTime };
-    });
-  };
-
-  const toggleformFieldsIncludeTimeSelectionHandler = (field) => {
-    setTextFieldFormData((prevState) => {
-      return {
-        ...textFieldFormData,
-        formFieldsIncludeTime: {
-          ...prevState.formFieldsIncludeTime,
-          [field]: !prevState.formFieldsIncludeTime[field],
-        },
-      };
-    });
-  };
-
   return (
     <>
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Date field label </label>
+        <label className="editorFieldLabel">Time field label </label>
         <input
           className={`editorField ${
             formDataValidation.label ? "notValidFormElement" : ""
           }`}
           type="text"
-          placeholder="Choose a date field label"
+          placeholder="Choose a time field label"
           value={textFieldFormData.label}
           onChange={(e) => onChangeMethod(e, "label")}
         />
@@ -144,80 +135,50 @@ function EditorAddDateFieldForm({
       </div>
 
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Date field minimum date</label>
+        <label className="editorFieldLabel">Time field minimum value</label>
         <input
           className={`editorField`}
-          type="date"
-          placeholder="Choose a date field minimum value"
-          value={textFieldFormData.minDate}
-          onChange={(e) => onChangeMethod(e, "minDate")}
+          type="time"
+          placeholder="Choose a time field minimum value"
+          value={textFieldFormData.minTime}
+          onChange={(e) => onChangeMethod(e, "minTime")}
           onClick={(e) => e.target.showPicker()}
-          max={textFieldFormData.maxDate}
+          max={textFieldFormData.maxTime}
         />
-        {/* <div className="editorFieldContainer allowTimeSwitcher">
-          <label className="editorFieldLabel">Allow time selection</label>
-          <Switcher
-            isOn={textFieldFormData.formFieldsIncludeTime.minDate}
-            handleToggle={() =>
-              toggleformFieldsIncludeTimeSelectionHandler("minDate")
-            }
-            forId={"minDateIncludeTime"}
-          />
-        </div> */}
       </div>
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Date field maximum date</label>
+        <label className="editorFieldLabel">Time field maximum value</label>
         <input
           className={`editorField`}
-          type="date"
-          placeholder="Choose a date field maximum value"
-          value={textFieldFormData.maxDate}
-          onChange={(e) => onChangeMethod(e, "maxDate")}
+          type="time"
+          placeholder="Choose a time field maximum value"
+          value={textFieldFormData.maxTime}
+          onChange={(e) => onChangeMethod(e, "maxTime")}
           onClick={(e) => e.target.showPicker()}
-          min={textFieldFormData.minDate}
+          min={textFieldFormData.minTime}
         />
-        {/* <div className="editorFieldContainer allowTimeSwitcher">
-          <label className="editorFieldLabel">Allow time selection</label>
-          <Switcher
-            isOn={textFieldFormData.formFieldsIncludeTime.maxDate}
-            handleToggle={() =>
-              toggleformFieldsIncludeTimeSelectionHandler("maxDate")
-            }
-            forId={"maxDateIncludeTime"}
-          />
-        </div> */}
       </div>
       <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Date field default value</label>
+        <label className="editorFieldLabel">Time field default value</label>
         <input
-          className={`editorField`}
-          type="date"
-          placeholder="Choose a date field default value"
+          className={`editorField ${
+            formDataValidation.defaultValue ? "notValidFormElement" : ""
+          }`}
+          type="time"
+          placeholder="Choose a time field default value"
           value={textFieldFormData.defaultValue}
           onChange={(e) => onChangeMethod(e, "defaultValue")}
           onClick={(e) => e.target.showPicker()}
-          min={textFieldFormData.minDate}
-          max={textFieldFormData.maxDate}
+          min={textFieldFormData.minTime}
+          max={textFieldFormData.maxTime}
         />
-        {/* <div className="editorFieldContainer allowTimeSwitcher">
-          <label className="editorFieldLabel">Allow time selection</label>
-          <Switcher
-            isOn={textFieldFormData.formFieldsIncludeTime.defaultValue}
-            handleToggle={() =>
-              toggleformFieldsIncludeTimeSelectionHandler("defaultValue")
-            }
-            forId={"defaultValueIncludeTime"}
-          />
-        </div> */}
+        {formDataValidation.defaultValue && (
+          <span className="notValidText">
+            The default time value has to be between the minimum and the maximum
+            time values *
+          </span>
+        )}
       </div>
-      {/* <div className="editorFieldContainer">
-        <label className="editorFieldLabel">Allow time selection</label>
-        <Switcher
-          isOn={textFieldFormData.includeTime}
-          handleToggle={toggleAllowTimeSelectionHandler}
-          forId={"includeTime"}
-        />
-      </div> */}
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">Field is required</label>
         <Switcher
@@ -230,7 +191,11 @@ function EditorAddDateFieldForm({
         <AppButtonPrimary
           text={formDisplayerMode === "add" ? "Create" : "Modify"}
           disabled={
-            formDataValidation.label || formDataValidation.type ? true : false
+            formDataValidation.label ||
+            formDataValidation.type ||
+            formDataValidation.defaultValue
+              ? true
+              : false
           }
           clickHandler={
             formDisplayerMode === "add" ? createNewFieldObject : editFieldObject
@@ -241,4 +206,4 @@ function EditorAddDateFieldForm({
   );
 }
 
-export default EditorAddDateFieldForm;
+export default EditorAddTimeFieldForm;
