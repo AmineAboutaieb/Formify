@@ -5,6 +5,8 @@ import EditorViewer from "../Editor/EditorViewer/EditorViewer";
 import EditorAddFieldForm from "../Editor/EditorAddFieldForm/EditorAddFieldForm";
 import EditorFormDisplayer from "../Editor/EditorAddFieldForm/EditorFormDisplayer/EditorFormDisplayer";
 import { v4 } from "uuid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function FormEditor() {
   const [dataFields, setDataFields] = useState([
@@ -49,18 +51,21 @@ function FormEditor() {
 
   const addNewDataFieldHandler = (fieldObject) => {
     setDataFields([...dataFields, fieldObject]);
+    showToastMessage(`Added ${fieldObject.specs.label} field`, "success");
   };
   const editDataFieldHandler = (fieldObject) => {
     let objectIndex = dataFields.findIndex((f) => f.key === fieldObject.key);
-    let newList = [...dataFields];
     if (objectIndex != -1) {
       let newList = dataFields;
       newList[objectIndex].specs = fieldObject.specs;
       setDataFields([...newList]);
+      showToastMessage(`Edited ${fieldObject.specs.label} field`, "success");
     }
   };
   const removeDataFieldHandler = (key) => {
+    let field = dataFields.filter((field) => field.key === key);
     const updatedFieldsList = dataFields.filter((field) => field.key != key);
+    showToastMessage(`Removed ${field[0].specs.label} field`, "success");
     setDataFields(updatedFieldsList);
   };
 
@@ -94,6 +99,28 @@ function FormEditor() {
     }
   };
 
+  const showToastMessage = (msg, mode) => {
+    if (mode === "success") {
+      toast.success(msg, {
+        position: toast.POSITION.BOTTOM_CENTER,
+        hideProgressBar: true,
+        autoClose: 2000,
+        theme: localStorage.getItem("formify-theme")
+          ? localStorage.getItem("formify-theme")
+          : "light",
+      });
+    } else if (mode === "warning") {
+      toast.warning(msg, {
+        position: toast.POSITION.BOTTOM_CENTER,
+        hideProgressBar: true,
+        autoClose: 10000,
+        theme: localStorage.getItem("formify-theme")
+          ? localStorage.getItem("formify-theme")
+          : "light",
+      });
+    }
+  };
+
   return (
     <div className="PageContainer">
       <h4 className="pageTitle">Create a new form</h4>
@@ -123,6 +150,7 @@ function FormEditor() {
           moveFieldDown={moveFieldDown}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 }
