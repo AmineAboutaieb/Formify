@@ -1,6 +1,7 @@
 :root {
     --body_primary_background : #f2f2f7;
     --body_secondary_background : #212529;
+    /* --body_secondary_background : #121212; */
     --body_tertiary_background : #ffffff;
     --body_fourth_background : #ffffff;
     --text_primary_color : rgb(108, 117, 125);
