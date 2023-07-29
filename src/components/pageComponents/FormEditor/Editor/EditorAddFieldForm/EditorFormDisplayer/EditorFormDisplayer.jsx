@@ -11,6 +11,7 @@ import EditorAddNumberFieldForm from "../EditorAddFieldForms/EditorAddNumberFiel
 import EditorAddPhoneFieldForm from "../EditorAddFieldForms/EditorAddPhoneFieldForm/EditorAddPhoneFieldForm";
 import EditorAddDateFieldForm from "../EditorAddFieldForms/EditorAddDateFieldForm/EditorAddDateFieldForm";
 import EditorAddTimeFieldForm from "../EditorAddFieldForms/EditorAddTimeFieldForm/EditorAddTimeFieldForm";
+import EditorAddCheckboxFieldForm from "../EditorAddFieldForms/EditorAddCheckboxFieldForm/EditorAddCheckboxFieldForm";
 
 function EditorFormDisplayer({
   setShowFormDisplayer,
@@ -62,6 +63,7 @@ function EditorFormDisplayer({
             <option value="phone">Phone</option>
             <option value="date">Date</option>
             <option value="time">Time</option>
+            <option value="checkbox">Checkbox</option>
           </select>
         </div>
         <div className="newFieldFormContainer">
@@ -130,6 +132,15 @@ function EditorFormDisplayer({
           )}
           {newFieldTypeDropdownValue === "time" && (
             <EditorAddTimeFieldForm
+              addNewDataFieldHandler={addNewDataFieldHandler}
+              toggleFormHandler={toggleFormHandler}
+              formDisplayerMode={formDisplayerMode}
+              fieldToModifyData={fieldToModifyData}
+              editDataFieldHandler={editDataFieldHandler}
+            />
+          )}
+          {newFieldTypeDropdownValue === "checkbox" && (
+            <EditorAddCheckboxFieldForm
               addNewDataFieldHandler={addNewDataFieldHandler}
               toggleFormHandler={toggleFormHandler}
               formDisplayerMode={formDisplayerMode}

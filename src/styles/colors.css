@@ -15,7 +15,7 @@
     --date_icon_color_mode : light;
 }
 [data-theme="dark"] {
-    --body_primary_background : rgb(45, 51, 60);
+    --body_primary_background : rgb(45, 51, 60); /*#1d232f*/
     --body_secondary_background : #313a46;
     --body_tertiary_background : #2f3742;
     --body_fourth_background : #313a46;

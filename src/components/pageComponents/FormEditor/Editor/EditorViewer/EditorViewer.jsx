@@ -9,6 +9,7 @@ import EditorNumberField from "../EditorFields/EditorNumberField/EditorNumberFie
 import EditorPhoneField from "../EditorFields/EditorPhoneField/EditorPhoneField";
 import EditorDateField from "../EditorFields/EditorDateField/EditorDateField";
 import EditorTimeField from "../EditorFields/EditorTimeField/EditorTimeField";
+import EditorCheckboxField from "../EditorFields/EditorCheckboxField/EditorCheckboxField";
 
 function EditorViewer({
   dataFields,
@@ -137,6 +138,21 @@ function EditorViewer({
         } else if (type === "time") {
           return (
             <EditorTimeField
+              key={key}
+              fieldKey={key}
+              specs={specs}
+              removeDataFieldHandler={removeDataFieldHandler}
+              setShowFormDisplayer={setShowFormDisplayer}
+              setFormDisplayerMode={setFormDisplayerMode}
+              setFieldToModifyDataHandler={setFieldToModifyDataHandler}
+              duplicateField={duplicateField}
+              moveFieldUp={moveFieldUp}
+              moveFieldDown={moveFieldDown}
+            />
+          );
+        } else if (type === "checkbox") {
+          return (
+            <EditorCheckboxField
               key={key}
               fieldKey={key}
               specs={specs}
