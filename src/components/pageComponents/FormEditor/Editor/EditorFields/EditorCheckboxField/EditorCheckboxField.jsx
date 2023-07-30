@@ -54,7 +54,12 @@ function EditorCheckboxField({
                   type="checkbox"
                   name={specs.label}
                   value={option.value}
-                  checked={options[index].checked}
+                  checked={
+                    options[index]?.checked === true ||
+                    options[index]?.checked === false
+                      ? options[index]?.checked
+                      : false
+                  }
                   onChange={() => handleCheckboxChange(index)}
                 />
               </div>
