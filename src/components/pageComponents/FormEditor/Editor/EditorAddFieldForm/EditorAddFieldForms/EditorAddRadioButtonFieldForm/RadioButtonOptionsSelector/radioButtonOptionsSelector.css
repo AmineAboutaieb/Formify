@@ -1,0 +1,64 @@
+.checkboxOptionSelectorContainer{
+    display:flex;
+    justify-content:space-between;
+    column-gap:10px;
+    width:100%;
+    margin:0 auto auto;
+}
+
+.checkboxLabelCheckboxContainer{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    column-gap:5px;
+}
+
+.checkboxLabelCheckboxContainer label{
+    cursor:pointer;
+}
+
+.checkboxOptionSelectorContainer input{
+    width:100%;
+}
+
+.plusIcon{
+    color:#fff!important;
+}
+
+.checkboxOptionDisplayer{
+    margin-top:8px;
+    min-height:180px;
+    max-height:180px;
+    overflow-y: auto;
+    /* border:1px solid black; */
+}
+
+.checkboxOptionDisplayerOption{
+    /* border:1px solid white; */
+    display:flex;
+    justify-content:space-between;
+    padding:2px;
+}
+
+.checkboxOptionDisplayerOptionIcon{
+    cursor:pointer;
+}
+
+.plusIcon:disabled{
+    color:var(--text_primary_muted_color)!important;
+}
+.plusIcon:hover{
+    background-color:var(--app_accent_color)!important;
+}
+.plusIcon:active{
+    background-color:var(--app_accent_color)!important;
+}
+
+.defaultSelectedCheckbox{
+    color:var(--app_accent_color);
+    font-weight:bold;
+}
+
+.defaultCheckboxSelector{
+    margin-top:8px;
+}

@@ -71,8 +71,15 @@ function FormEditor() {
 
   const duplicateField = (key) => {
     let objectIndex = dataFields.findIndex((f) => f.key === key);
-    let duplicate = { ...dataFields[objectIndex] };
-    duplicate.key = v4();
+    let randomLabel = v4();
+    let duplicate = {
+      ...dataFields[objectIndex],
+      key: v4(),
+      specs: {
+        ...dataFields[objectIndex].specs,
+        label: randomLabel.slice(0, randomLabel.length / 2),
+      },
+    };
     addNewDataFieldHandler(duplicate);
   };
 
@@ -113,7 +120,7 @@ function FormEditor() {
       toast.warning(msg, {
         position: toast.POSITION.BOTTOM_CENTER,
         hideProgressBar: true,
-        autoClose: 10000,
+        autoClose: 2000,
         theme: localStorage.getItem("formify-theme")
           ? localStorage.getItem("formify-theme")
           : "light",
