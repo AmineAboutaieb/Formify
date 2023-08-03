@@ -18,7 +18,7 @@ function EditorTextField({
       <div className="editorFieldContainer">
         <label className="editorFieldLabel">
           {specs.label}
-          {specs.fieldRequired && <span className="notValidTextColor"> *</span>}
+          {specs.duplicateIndex && <span> {specs.duplicateIndex}</span>}
         </label>
         <input
           className="editorField"
